@@ -9,7 +9,7 @@ Chatter is a project written for Project 2 in the Revature bootcamp. Chatter is 
 * Log4J
 
 ### Authors
-* Ashley
+* Ashley Robinson
 * Michael Luster
 * Curtiss Young
 * Katelyn Barnes
