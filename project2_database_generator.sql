@@ -26,6 +26,7 @@ CREATE TABLE activated (
 CREATE TABLE usrs (
     u_id NUMBER(9),
     username VARCHAR2(50),
+    pwd VARCHAR2(50),
     f_name VARCHAR2(30),
     l_name VARCHAR2(30),
     priv NUMBER(2),

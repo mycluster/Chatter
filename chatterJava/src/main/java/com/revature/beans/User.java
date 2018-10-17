@@ -23,6 +23,9 @@ public class User {
 	@Column(name="username")
 	private String username;
 	
+	@Column(name="pwd")
+	private String password;
+	
 	@Column(name="f_name")
 	private String fName;
 	
@@ -42,9 +45,11 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Integer id, String username, String fName, String lName, Priv priv, Activation activation) {
+	public User(Integer id, String username, String password, String fName, String lName, Priv priv,
+			Activation activation) {
 		this.id = id;
 		this.username = username;
+		this.password = password;
 		this.fName = fName;
 		this.lName = lName;
 		this.priv = priv;
@@ -53,8 +58,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", fName=" + fName + ", lName=" + lName + ", priv=" + priv
-				+ ", activation=" + activation + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", fName=" + fName + ", lName="
+				+ lName + ", priv=" + priv + ", activation=" + activation + "]";
 	}
 
 	@Override
@@ -65,6 +70,7 @@ public class User {
 		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lName == null) ? 0 : lName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((priv == null) ? 0 : priv.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -99,6 +105,11 @@ public class User {
 				return false;
 		} else if (!lName.equals(other.lName))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		if (priv == null) {
 			if (other.priv != null)
 				return false;
@@ -126,6 +137,14 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getfName() {
@@ -159,6 +178,6 @@ public class User {
 	public void setActivation(Activation activation) {
 		this.activation = activation;
 	}
-	
+
 	
 }
