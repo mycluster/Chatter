@@ -3,7 +3,6 @@ package com.revature.dao;
 import java.util.List;
 
 import com.revature.beans.ClassMembership;
-import com.revature.beans.ClassRole;
 import com.revature.beans.User;
 
 public interface ClassMembershipDao {

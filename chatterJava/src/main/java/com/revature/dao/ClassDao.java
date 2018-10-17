@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.util.List;
+import com.revature.beans.Class;
 
 public interface ClassDao {
 	
