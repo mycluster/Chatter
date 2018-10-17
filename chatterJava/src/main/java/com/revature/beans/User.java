@@ -32,26 +32,36 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="priv")
 	private Priv priv;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="activated")
+	private Activation activation;
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(Integer id, String username, String fName, String lName, Priv priv) {
+
+	public User(Integer id, String username, String fName, String lName, Priv priv, Activation activation) {
 		this.id = id;
 		this.username = username;
 		this.fName = fName;
 		this.lName = lName;
 		this.priv = priv;
+		this.activation = activation;
 	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", fName=" + fName + ", lName=" + lName + ", priv=" + priv
-				+ "]";
+				+ ", activation=" + activation + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((activation == null) ? 0 : activation.hashCode());
 		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lName == null) ? 0 : lName.hashCode());
@@ -59,6 +69,7 @@ public class User {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -68,6 +79,11 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (activation == null) {
+			if (other.activation != null)
+				return false;
+		} else if (!activation.equals(other.activation))
+			return false;
 		if (fName == null) {
 			if (other.fName != null)
 				return false;
@@ -95,34 +111,54 @@ public class User {
 			return false;
 		return true;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getfName() {
 		return fName;
 	}
+
 	public void setfName(String fName) {
 		this.fName = fName;
 	}
+
 	public String getlName() {
 		return lName;
 	}
+
 	public void setlName(String lName) {
 		this.lName = lName;
 	}
+
 	public Priv getPriv() {
 		return priv;
 	}
+
 	public void setPriv(Priv priv) {
 		this.priv = priv;
 	}
+
+	public Activation getActivation() {
+		return activation;
+	}
+
+	public void setActivation(Activation activation) {
+		this.activation = activation;
+	}
+	
+	
 }
