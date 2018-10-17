@@ -1,20 +1,19 @@
 package com.revature.beans;
 
-public class NoteType {
+public class ClassRole {
 	private Integer id;
 	private String name;
-	
-	public NoteType() {
+	public ClassRole() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NoteType(Integer id, String name) {
+	public ClassRole(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 	@Override
 	public String toString() {
-		return "NoteType [id=" + id + ", name=" + name + "]";
+		return "ClassRole [id=" + id + ", name=" + name + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -32,7 +31,7 @@ public class NoteType {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NoteType other = (NoteType) obj;
+		ClassRole other = (ClassRole) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
