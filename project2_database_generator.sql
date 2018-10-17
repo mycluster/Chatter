@@ -7,6 +7,7 @@ DROP TABLE classes;
 DROP TABLE notes;
 DROP TABLE note_types;
 DROP TABLE usrs;
+DROP TABLE activated;
 DROP TABLE privs;
 
 
@@ -16,15 +17,24 @@ CREATE TABLE privs (
     CONSTRAINT privs_pk PRIMARY KEY (p_id)
 );
 
+CREATE TABLE activated (
+    a_id NUMBER(1),
+    a_name VARCHAR2(20),
+    CONSTRAINT activated_pk PRIMARY KEY (a_id)
+);
+
 CREATE TABLE usrs (
     u_id NUMBER(9),
     username VARCHAR2(50),
     f_name VARCHAR2(30),
     l_name VARCHAR2(30),
     priv NUMBER(2),
+    activated NUMBER(1),
     CONSTRAINT usrs_pk PRIMARY KEY (u_id),
     CONSTRAINT usrs_fk FOREIGN KEY (priv)
-        REFERENCES privs (p_id)
+        REFERENCES privs (p_id),
+    CONSTRAINT usrs_fk_activated FOREIGN KEY (activated)
+        REFERENCES activated (a_id)
 );
 
 CREATE TABLE note_types (

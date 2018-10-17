@@ -54,6 +54,7 @@
 		</property>
 		
 		<mapping class="com.revature.beans.AccessLevel"/>
+		<mapping class="com.revature.beans.Activation"/>
 		<mapping class="com.revature.beans.Class"/>
 		<mapping class="com.revature.beans.ClassAccess"/>
 		<mapping class="com.revature.beans.ClassMembership"/>
