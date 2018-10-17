@@ -1,7 +1,23 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="access_level")
 public class AccessLevel {
+	@Id
+	@Column(name="a_id")
+	@SequenceGenerator(sequenceName="ACCESS_LEVEL_SEQ", name="access_level_seq")
+	@GeneratedValue(generator="access_level_seq", strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(name="a_name")
 	private String name;
 	public AccessLevel() {
 		super();

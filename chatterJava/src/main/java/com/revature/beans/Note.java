@@ -1,9 +1,35 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="notes")
 public class Note {
+	@Id
+	@Column(name="n_id")
+	@SequenceGenerator(sequenceName="note_seq", name="note_seq")
+	@GeneratedValue(generator="note_seq", strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="ownr")
 	private User owner;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="ty")
 	private NoteType type;
+	
+	@Column(name="loc")
+
 	private String location;
 	public Note() {
 		super();

@@ -1,7 +1,23 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="note_types")
 public class NoteType {
+	@Id
+	@Column(name="n_id")
+	@SequenceGenerator(sequenceName="note_type_seq", name="note_type_seq")
+	@GeneratedValue(generator="note_type_seq", strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(name="n_name")
 	private String name;
 	
 	public NoteType() {

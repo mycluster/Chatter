@@ -1,7 +1,23 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="privs")
 public class Priv {
+	@Id
+	@Column(name="p_id")
+	@SequenceGenerator(sequenceName="priv_seq", name="priv_seq")
+	@GeneratedValue(generator="priv_seq", strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(name="p_name")
 	private String name;
 	public Priv() {
 		super();

@@ -1,7 +1,23 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="class_roles")
 public class ClassRole {
+	@Id
+	@Column(name="c_id")
+	@SequenceGenerator(sequenceName="class_role_seq", name="class_role_seq")
+	@GeneratedValue(generator="class_role_seq", strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(name="c_name")
 	private String name;
 	public ClassRole() {
 		super();

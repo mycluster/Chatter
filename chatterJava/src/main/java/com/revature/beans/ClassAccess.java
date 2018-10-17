@@ -1,9 +1,36 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="class_accesses")
 public class ClassAccess {
+	
+	@Id
+	@Column(name="a_id")
+	@SequenceGenerator(sequenceName="class_access_seq", name="class_access_seq")
+	@GeneratedValue(generator="class_access_seq", strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="cls")
 	private Class cls;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="note")
 	private Note note;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="a_level")
 	private AccessLevel access;
 	public ClassAccess() {
 		super();

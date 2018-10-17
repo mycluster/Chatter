@@ -1,9 +1,35 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="class_membership")
 public class ClassMembership {
+	@Id
+	@Column(name="c_id")
+	@SequenceGenerator(sequenceName="class_membership_seq", name="class_membership_seq")
+	@GeneratedValue(generator="class_membership_seq", strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="usr")
 	private User user;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="cls")
 	private Class cls;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="c_role")
 	private ClassRole role;
 	public ClassMembership() {
 		super();

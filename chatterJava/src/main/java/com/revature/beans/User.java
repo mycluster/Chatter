@@ -1,10 +1,36 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usrs")
 public class User {
+	@Id
+	@Column(name="u_id")
+	@SequenceGenerator(sequenceName="user_seq", name="user_seq")
+	@GeneratedValue(generator="user_seq", strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(name="username")
 	private String username;
+	
+	@Column(name="f_name")
 	private String fName;
+	
+	@Column(name="l_name")
 	private String lName;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="priv")
 	private Priv priv;
 	public User() {
 		super();
