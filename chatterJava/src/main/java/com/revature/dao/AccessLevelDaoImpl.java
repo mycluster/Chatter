@@ -2,8 +2,10 @@ package com.revature.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.revature.beans.AccessLevel;
 import com.revature.util.HibernateUtil;
@@ -18,7 +20,7 @@ import com.revature.util.HibernateUtil;
  * 
  */
 public class AccessLevelDaoImpl implements AccessLevelDao {
-
+	private final static Logger logger = Logger.getLogger(AccessLevelDao.class);
 	@Override
 	public List<AccessLevel> selectAllAccessLevel() {
 		// create a new session
@@ -27,31 +29,91 @@ public class AccessLevelDaoImpl implements AccessLevelDao {
 		// make a null reference to a list of accessLevels
 		List<AccessLevel> accessLevels = null;
 		
+		logger.info("Selecting all AccessLevels via DAO");
 		try {
 			// attempt to get all the access levels
+			logger.info("Executing FROM AccessLevel query");
 			accessLevels = session.createQuery("FROM AccessLevel").list();
 		
 		} catch (HibernateException e) {
 			// if there is a hibernate exception, catch it
 			// and print the stack trace
+			logger.error("HibernateException triggered");
 			e.printStackTrace();
 		} finally {
 			// clean up after ourselves
 			session.close();
 		}
+		logger.info("Returning list of AccessLevels");
 		return accessLevels;
 	}
 
 	@Override
 	public AccessLevel selectAccessLevelById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		// create new session
+		Session session = HibernateUtil.getSession();
+		
+		// make a null reference to an accessLevel
+		AccessLevel accessLevel = null;
+		logger.info("Selecting AccessLevel by id");
+		logger.debug("With id" + id);
+		
+		try {
+			// attempt to get the AccessLevel
+			accessLevel = (AccessLevel) session.get(AccessLevel.class, id);
+			logger.info("Retrieved AccessLevel");
+		} catch (HibernateException e) {
+			logger.debug("HibernateException triggered");
+		} finally {
+			// clean up
+			session.close();
+		}
+		return accessLevel;
 	}
 
 	@Override
 	public AccessLevel setAccessLevel(AccessLevel accessLevel) {
-		// TODO Auto-generated method stub
-		return null;
+		// create new session
+		Session session = HibernateUtil.getSession();
+		// Create a null reference to a transaction
+		Transaction tx = null;
+		// create a null reference to an AccessLevel
+		AccessLevel aLevel = null;
+		
+		logger.info("Updating AccessLevel");
+		logger.debug("AccessLevel "+ accessLevel.toString());
+		
+		try {
+			// begin the transaction
+			tx = session.beginTransaction();
+			logger.info("Transaction begins");
+			
+			// get the version from the database
+			aLevel = (AccessLevel) session.get(AccessLevel.class, accessLevel.getId());
+			logger.info("AccessLevel retrieved from the database");
+			
+			// set the name to the name in accessLevel 
+			// we do not update id because they are the same already
+			// also we shouldn't be changing primary key values
+			aLevel.setName(accessLevel.getName());
+			logger.info("AccessLevel from database updated");
+			
+			// save the changes
+			session.save(aLevel);
+			logger.info("Changes saved in session");
+			
+			//commit the changes
+			tx.commit();
+			logger.info("Changes committed");
+		} catch (HibernateException e) {
+			logger.debug("HibernateException triggered");
+			e.printStackTrace();
+		} finally {
+			// close the session
+			session.close();
+		}
+		// return the updated AccessLevel
+		return aLevel;
 	}
 
 }
