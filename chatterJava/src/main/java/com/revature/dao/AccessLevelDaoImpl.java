@@ -47,7 +47,12 @@ public class AccessLevelDaoImpl implements AccessLevelDao {
 		logger.info("Returning list of AccessLevels");
 		return accessLevels;
 	}
-
+	
+	/**
+	 * Returns an AccessLevel object with field values
+	 * that match the record in the database with the primary key
+	 * value id
+	 */
 	@Override
 	public AccessLevel selectAccessLevelById(Integer id) {
 		// create new session
@@ -68,9 +73,16 @@ public class AccessLevelDaoImpl implements AccessLevelDao {
 			// clean up
 			session.close();
 		}
+		logger.info("Returning AccessLevel");
 		return accessLevel;
 	}
-
+	
+	/**
+	 * Takes in an AccessLevel object and updates the records
+	 * with the same primary key in the AccessLevels table to
+	 * match the input object's values. Returns a new AccessLevel
+	 * object that corresponds to the updated record
+	 */
 	@Override
 	public AccessLevel setAccessLevel(AccessLevel accessLevel) {
 		// create new session
@@ -112,6 +124,7 @@ public class AccessLevelDaoImpl implements AccessLevelDao {
 			// close the session
 			session.close();
 		}
+		logger.info("Returning updated AccessLevel");
 		// return the updated AccessLevel
 		return aLevel;
 	}
