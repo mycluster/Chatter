@@ -12,8 +12,4 @@ public interface UserDao {
 	public void insertNewUser(User user);
 	public Integer deleteUserById(Integer id);
 	public Integer updateUser(User user);
-	
-	
-	//determine where to store passwords
-
 }

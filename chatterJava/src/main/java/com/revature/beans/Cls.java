@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="classes")
-public class Class {
+public class Cls {
 	@Id
 	@Column(name="c_id")
 	@SequenceGenerator(sequenceName="CLASS_SEQ", name="class_seq")
@@ -19,11 +19,11 @@ public class Class {
 	
 	@Column(name="c_name")
 	private String name;
-	public Class() {
+	public Cls() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Class(Integer id, String name) {
+	public Cls(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -47,7 +47,7 @@ public class Class {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Class other = (Class) obj;
+		Cls other = (Cls) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
