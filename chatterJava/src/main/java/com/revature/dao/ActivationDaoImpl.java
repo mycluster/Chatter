@@ -62,7 +62,8 @@ public class ActivationDaoImpl implements ActivationDao {
 			activation = (Activation) session.get(Activation.class, id);
 			logger.info("Retrieved Activation");
 		} catch (HibernateException e) {
-			logger.debug("HibernateException triggered");
+			logger.error("HibernateException triggered");
+			e.printStackTrace();
 		} finally {
 			// clean up
 			session.close();
@@ -112,7 +113,7 @@ public class ActivationDaoImpl implements ActivationDao {
 			tx.commit();
 			logger.info("Changes committed");
 		} catch (HibernateException e) {
-			logger.debug("HibernateException triggered");
+			logger.error("HibernateException triggered");
 			e.printStackTrace();
 		} finally {
 			//close the session

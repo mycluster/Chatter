@@ -20,7 +20,7 @@ import com.revature.util.HibernateUtil;
  * 
  */
 public class AccessLevelDaoImpl implements AccessLevelDao {
-	private final static Logger logger = Logger.getLogger(AccessLevelDao.class);
+	private final static Logger logger = Logger.getLogger(AccessLevelDaoImpl.class);
 	@Override
 	public List<AccessLevel> selectAllAccessLevel() {
 		// create a new session
@@ -68,7 +68,8 @@ public class AccessLevelDaoImpl implements AccessLevelDao {
 			accessLevel = (AccessLevel) session.get(AccessLevel.class, id);
 			logger.info("Retrieved AccessLevel");
 		} catch (HibernateException e) {
-			logger.debug("HibernateException triggered");
+			logger.error("HibernateException triggered");
+			e.printStackTrace();
 		} finally {
 			// clean up
 			session.close();
@@ -118,7 +119,7 @@ public class AccessLevelDaoImpl implements AccessLevelDao {
 			tx.commit();
 			logger.info("Changes committed");
 		} catch (HibernateException e) {
-			logger.debug("HibernateException triggered");
+			logger.error("HibernateException triggered");
 			e.printStackTrace();
 		} finally {
 			// close the session
