@@ -1,0 +1,22 @@
+{
+  "name": "chat-app-server",
+  "version": "1.0.0",
+  "description": "PusherAPI test for ChatterBox",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mycluster/Chatter.git"
+  },
+  "keywords": [
+    "IM"
+  ],
+  "author": "Mike Luster",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mycluster/Chatter/issues"
+  },
+  "homepage": "https://github.com/mycluster/Chatter#readme"
+}
