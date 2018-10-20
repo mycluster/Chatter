@@ -270,4 +270,73 @@ public class ClassAccessDaoImpl implements ClassAccessDao {
 		return classAccesses;
 	}
 
+	@Override
+	public Integer insertClassAccess(ClassAccess classAccess) {
+		// create a new session
+				Session session = HibernateUtil.getSession();
+				// create a null reference to a transaction
+				Transaction tx = null;
+				// create a null reference to an Integer
+				Integer id = null;
+				logger.info("Inserting ClassAccess via DAO");
+				logger.debug("ClassAccess: " + classAccess.toString());
+
+				try {
+					// begin the transaction
+					tx = session.beginTransaction();
+					logger.info("Beginning transaction");
+					// perform the insertion
+					id = (Integer) session.save(classAccess);
+					logger.info("ClassAccess inserted");
+					// commit the changes
+					tx.commit();
+					logger.info("Changes committed");
+				} catch (HibernateException e) {
+					logger.error("HibernateException triggered", e);
+				} finally {
+					// clean up
+					session.close();
+					logger.info("Session closed");
+				}
+				// return the id of the newly inserted ClassAccess
+				logger.info("Returning Id");
+				logger.debug("id: " + id);
+				return id;
+	}
+
+	@Override
+	public void deleteClassAccess(Integer id) {
+		// create a new session
+				Session session = HibernateUtil.getSession();
+				// create a null Transaction reference
+				Transaction tx = null;
+				logger.info("Deleting ClassAccess via DAO");
+				logger.debug("With ID: " + id);
+				try {
+					// begin the transaction
+					tx = session.beginTransaction();
+					logger.info("Beginning transaction");
+
+					// delete the ClassAccess
+					session.delete(session.get(ClassAccess.class, id));
+					logger.info("ClassAccess deleted");
+					// commit the changes
+					tx.commit();
+				} catch (HibernateException e) {
+					// if a Hibernate Exception is triggered, catch
+					// it and log it
+					logger.error("HibernateException triggered", e);
+
+					// since something went wrong, rollback the transaction
+					tx.rollback();
+					logger.info("Rolling back the transaction");
+				} finally {
+					// close the session
+					session.close();
+					logger.info("Session closed");
+				}
+
+		
+	}
+
 }

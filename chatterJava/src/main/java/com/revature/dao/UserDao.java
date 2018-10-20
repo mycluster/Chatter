@@ -9,7 +9,7 @@ public interface UserDao {
 	public List<User> selectAllUser();
 	public User selectUserById(Integer id);
 	public User selectUserByUsername(String username);
-	public void insertNewUser(User user);
-	public Integer deleteUserById(Integer id);
-	public Integer updateUser(User user);
+	public Integer insertNewUser(User user);
+	public void deleteUserById(Integer id);
+	public User updateUser(User user);
 }

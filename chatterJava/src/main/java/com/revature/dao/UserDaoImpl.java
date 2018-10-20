@@ -25,21 +25,21 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void insertNewUser(User user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Integer deleteUserById(Integer id) {
+	public Integer insertNewUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer updateUser(User user) {
+	public void deleteUserById(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public User updateUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }

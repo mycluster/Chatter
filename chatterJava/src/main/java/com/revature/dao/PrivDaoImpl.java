@@ -109,7 +109,7 @@ public class PrivDaoImpl implements PrivDao {
 			session.close();
 			logger.info("Session closed");
 		}
-		// return the id of the newly inserted session
+		// return the id of the newly inserted priv
 		logger.info("Returning Id");
 		logger.debug("id: " + id);
 		return id;
@@ -130,7 +130,7 @@ public class PrivDaoImpl implements PrivDao {
 		Query userQuery = null;
 		// create an HQL statement to delete all associated notes
 		String userHql = "UPDATE Usr SET priv = null WHERE priv = :priv";
-		logger.info("Deleting NoteType via DAO");
+		logger.info("Deleting Priv via DAO");
 		logger.debug("With ID: " + id);
 		try {
 			// begin the transaction
@@ -147,7 +147,7 @@ public class PrivDaoImpl implements PrivDao {
 
 			// set the parameter
 			userQuery.setParameter("priv", priv);
-			logger.info("NoteType parameter set");
+			logger.info("Priv parameter set");
 
 			// execute the query
 			userQuery.executeUpdate();

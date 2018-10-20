@@ -13,6 +13,8 @@ public interface ClassAccessDao {
 	public List<ClassAccess> selectAllClassAccess();
 	public ClassAccess selectClassAccessById(Integer id);
 	public ClassAccess updateClassAccess(ClassAccess classAccess);
+	public Integer insertClassAccess(ClassAccess classAccess);
+	public void deleteClassAccess(Integer id);
 	
 	// We might want to retrieve ClassAccesses by a class, or by a specific note
 	// or by class and access level (ie all the notes that class A can write to)
