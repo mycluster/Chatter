@@ -11,7 +11,7 @@ import com.revature.beans.ClassRole;
 import com.revature.util.HibernateUtil;
 
 public class ClassRoleDaoImpl implements ClassRoleDao {
-	private final static Logger logger = Logger.getLogger(ClassMembershipDaoImpl.class);
+	private final static Logger logger = Logger.getLogger(ClassRoleDaoImpl.class);
 	/**
 	 * Selects all records from the ClassRole table and returns them as a list of 
 	 * ClassRole objects

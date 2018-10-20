@@ -13,7 +13,7 @@ import com.revature.beans.Cls;
 import com.revature.util.HibernateUtil;
 
 public class ClsDaoImpl implements ClsDao {
-	private final static Logger logger = Logger.getLogger(ClassMembershipDaoImpl.class);
+	private final static Logger logger = Logger.getLogger(ClsDaoImpl.class);
 
 	/**
 	 * Selects all records from the Cls table and returns them as a list of Cls
