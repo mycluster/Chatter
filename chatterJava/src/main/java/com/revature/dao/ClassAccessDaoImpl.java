@@ -37,13 +37,17 @@ public class ClassAccessDaoImpl implements ClassAccessDao {
 			logger.info("Executing FROM ClassAccess query");
 			classAccesses = session.createQuery("FROM ClassAccess").list();
 		} catch (HibernateException e) {
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// if a HibernateException is triggered, catch it
+			// and log it
+			logger.error("HibernateException triggered", e);
 		} finally {
 			// close the session
 			session.close();
+			logger.info("Session closed");
 		}
+		// return the ClassAccesses
 		logger.info("Returning list of ClassAccesses");
+		logger.debug("ClassAccesses: "+ classAccesses.toString());
 		return classAccesses;
 	}
 
@@ -66,13 +70,17 @@ public class ClassAccessDaoImpl implements ClassAccessDao {
 			classAccess = (ClassAccess) session.get(ClassAccess.class, id);
 			logger.info("Retrieved ClassAccess");
 		} catch (HibernateException e) {
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// if a Hibernate Exception is triggered,
+			// catch it and log it
+			logger.error("HibernateException triggered", e);
 		} finally {
 			// clean up
 			session.close();
+			logger.info("Session closed");
 		}
+		// return the ClassAccess
 		logger.info("Returning ClassAccess");
+		logger.debug("ClassAccess: "+ classAccess.toString());
 		return classAccess;
 	}
 
@@ -118,13 +126,19 @@ public class ClassAccessDaoImpl implements ClassAccessDao {
 			tx.commit();
 			logger.info("Changes committed");
 		} catch (HibernateException e) {
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// if a Hibernate Exception is triggered, catch
+			// it and log it
+			logger.error("HibernateException triggered", e);
+			// since something went wrong, rollback the transaction
+			tx.rollback();
+			logger.info("Rolling back the transaction");
 		} finally {
 			// close the session
 			session.close();
+			logger.info("Session closed");
 		}
 		logger.info("Returning updated ClassAccess");
+		logger.debug("ClassAccess: "+ cAccess.toString());
 		// return the updated ClassAccess
 		return cAccess;
 	}
@@ -160,14 +174,17 @@ public class ClassAccessDaoImpl implements ClassAccessDao {
 			classAccesses = query.list();
 			logger.info("ClassAccesses retrieved");
 		} catch (HibernateException e) {
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// if a Hibernate Exception is triggered, catch
+			// it and log it
+			logger.error("HibernateException triggered", e);
 		} finally {
 			// close the session
 			session.close();
+			logger.info("Session closed");
 		}
 		// return the list of ClassAccesses
 		logger.info("Returning ClassAccess list");
+		logger.debug("ClassAccesses: "+ classAccesses.toString());
 		return classAccesses;
 	}
 
@@ -197,13 +214,16 @@ public class ClassAccessDaoImpl implements ClassAccessDao {
 			classAccesses = crit.list();
 			logger.info("ClassAccesses recieved");
 		} catch (HibernateException e) {
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// if a Hibernate Exception is triggered, catch
+			// it and log it
+			logger.error("HibernateException triggered", e);
 		} finally {
 			// clean up
 			session.close();
+			logger.info("Session closed");
 		}
 		logger.info("Returning ClassAccesses");
+		logger.debug("classAccesses: "+ classAccesses.toString());
 		// return the ClassAccesses
 		return classAccesses;
 	}
@@ -236,12 +256,16 @@ public class ClassAccessDaoImpl implements ClassAccessDao {
 			classAccesses = crit.list();
 			logger.info("ClassAccesses recieved");
 		} catch (HibernateException e) {
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// if a Hibernate Exception is triggered, catch
+			// it and log it
+			logger.error("HibernateException triggered", e);
 		} finally {
+			// clean up
 			session.close();
+			logger.info("Session closed");
 		}
 		logger.info("Returning ClassAccesses");
+		logger.debug("classAccesses: "+ classAccesses.toString());
 		// return the ClassAccesses
 		return classAccesses;
 	}

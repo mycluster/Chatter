@@ -10,9 +10,9 @@ public interface ClassMembershipDao {
 
 	public List<ClassMembership> selectAllClassMembership();
 	public ClassMembership selectClassMemebershipById(Integer id);
-	public Integer updateClassMembership(ClassMembershipDao classmebership);
-	public Integer deleteClassMemebershipById(Integer id);
-	public void insertClassMemebership(ClassMembership classMembership);
+	public ClassMembership updateClassMembership(ClassMembership classMembership);
+	public void deleteClassMemebershipById(Integer id);
+	public Integer insertClassMemebership(ClassMembership classMembership);
 	
 	// we want to be able to select class membership by a user
 	// and also by a class

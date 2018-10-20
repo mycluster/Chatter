@@ -32,14 +32,16 @@ public class ActivationDaoImpl implements ActivationDao {
 
 		} catch (HibernateException e) {
 			// if there is a hibernate exception, catch it
-			// and print the stack trace
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// and log it
+			logger.error("HibernateException triggered", e);
 		} finally {
 			// clean up after ourselves
 			session.close();
+			logger.info("Session closed");
 		}
+		// return the activations
 		logger.info("Returning list of Activations");
+		logger.debug("Activations: " + activations.toString());
 		return activations;
 	}
 
@@ -62,21 +64,24 @@ public class ActivationDaoImpl implements ActivationDao {
 			activation = (Activation) session.get(Activation.class, id);
 			logger.info("Retrieved Activation");
 		} catch (HibernateException e) {
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// if there was a hibernate exception
+			// catch it and log it
+			logger.error("HibernateException triggered", e);
 		} finally {
 			// clean up
 			session.close();
+			logger.info("Session closed");
 		}
+		// return the activation
 		logger.info("Returning Activation");
+		logger.debug("Activation: "+ activation.toString());
 		return activation;
 	}
-	
+
 	/**
-	 * Takes in an Activation Object and then updates the
-	 * values of the record in the Activation table in the database
-	 * with the primary key that matches the object's id field 
-	 * to match the values in the fields of the Activation object
+	 * Takes in an Activation Object and then updates the values of the record in
+	 * the Activation table in the database with the primary key that matches the
+	 * object's id field to match the values in the fields of the Activation object
 	 */
 	@Override
 	public Activation setActivation(Activation activation) {
@@ -86,41 +91,47 @@ public class ActivationDaoImpl implements ActivationDao {
 		Transaction tx = null;
 		// create a null reference to an Activation
 		Activation a = null;
-		
+
 		logger.info("Updating Activation");
-		logger.debug("Activation :"+activation.toString());
-		
+		logger.debug("Activation :" + activation.toString());
+
 		try {
 			// begin the transaction
 			tx = session.beginTransaction();
 			logger.info("Transaction begins");
-			
+
 			// get the version from the database
 			a = (Activation) session.get(Activation.class, activation.getId());
 			logger.info("Activation retrieved from the database");
-			
+
 			// set the name to the name in the activation
 			// we do not update id because they already match
 			// also, we should not be going arounding changing primary keys
 			a.setName(activation.getName());
 			logger.info("Activation from database updated");
-			
-			//save the changes
+
+			// save the changes
 			session.save(a);
 			logger.info("Changes saved in session");
-			
-			//commit the changes
+
+			// commit the changes
 			tx.commit();
 			logger.info("Changes committed");
 		} catch (HibernateException e) {
-			logger.error("HibernateException triggered");
-			e.printStackTrace();
+			// if a HibernateException is triggered, catch
+			// it and log it
+			logger.error("HibernateException triggered", e);
+			// since something went wrong, rollback the transaction
+			tx.rollback();
+			logger.info("Rolling back the transaction");
 		} finally {
-			//close the session
+			// close the session
 			session.close();
+			logger.info("Session closed");
 		}
 		logger.info("Returning updated Activation");
 		// return the updated Activation
+		logger.debug("Activation: "+ a.toString());
 		return a;
 	}
 
