@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\chatter"
+    "\\chatter",
+    "\\chatter\\src",
+    "\\chatter\\src\\app",
+    "\\chatter\\src\\app\\chatterbox"
   ],
-  "SelectedNode": "\\AngularSend.zip",
+  "SelectedNode": "\\chatter\\src\\app\\chatterbox\\chatterbox.component.ts",
   "PreviewInSolutionExplorer": false
 }
