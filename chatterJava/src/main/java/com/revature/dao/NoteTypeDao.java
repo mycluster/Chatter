@@ -8,8 +8,8 @@ public interface NoteTypeDao {
 	
 	public List<NoteType> selectAllNoteType();
 	public NoteType selectNoteTypeById(Integer id);
-	public Integer updateNoteType(NoteType noteType);
-	public Integer deleteNoteTypeById(Integer id);
-	public void insertNoteType(NoteType noteType);
+	public NoteType updateNoteType(NoteType noteType);
+	public void deleteNoteTypeById(Integer id);
+	public Integer insertNoteType(NoteType noteType);
 
 }

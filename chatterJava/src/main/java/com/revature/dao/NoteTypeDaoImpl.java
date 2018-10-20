@@ -19,21 +19,21 @@ public class NoteTypeDaoImpl implements NoteTypeDao {
 	}
 
 	@Override
-	public Integer updateNoteType(NoteType noteType) {
+	public NoteType updateNoteType(NoteType noteType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer deleteNoteTypeById(Integer id) {
+	public void deleteNoteTypeById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public void insertNoteType(NoteType noteType) {
+	public Integer insertNoteType(NoteType noteType) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 }
