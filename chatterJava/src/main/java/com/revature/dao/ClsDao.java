@@ -7,7 +7,7 @@ public interface ClsDao {
 	
 	public List<Cls> selectAllClass();
 	public Cls selectClassById(Integer id);
-	public void insertNewClass(Cls cls);
-	public Integer deleteClassById(Integer id);
-	public Integer updateClass(Cls cls);
+	public Integer insertNewClass(Cls cls);
+	public void deleteClassById(Integer id);
+	public Cls updateClass(Cls cls);
 }
