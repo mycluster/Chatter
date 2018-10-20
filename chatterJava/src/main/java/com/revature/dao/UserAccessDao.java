@@ -10,8 +10,9 @@ public interface UserAccessDao {
 
 	public List<UserAccess> selectAllUserAccess();
 	public UserAccess selectUserAccessById(Integer id);
-	public Integer updateUserAccess(UserAccess userAccess);
-	
+	public UserAccess updateUserAccess(UserAccess userAccess);
+	public Integer insertUserAccess(UserAccess userAccess);
+	public void deleteUserAccess(Integer id);
 	
 	// Same reasoning for these as with classaccesses
 	public List<UserAccess> getClassAccessByUser(User user);

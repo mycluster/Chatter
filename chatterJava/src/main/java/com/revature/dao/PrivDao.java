@@ -8,5 +8,7 @@ public interface PrivDao {
 	
 	public List<Priv> selectAllPriv();
 	public Priv selectAllPrivById(Integer id);
-	
+	public Integer insertPriv(Priv priv);
+	public void deletePrivById(Integer id);
+	public Priv updatePriv(Priv priv);
 }

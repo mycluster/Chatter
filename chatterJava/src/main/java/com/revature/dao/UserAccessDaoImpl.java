@@ -21,9 +21,21 @@ public class UserAccessDaoImpl implements UserAccessDao {
 	}
 
 	@Override
-	public Integer updateUserAccess(UserAccess userAccess) {
+	public UserAccess updateUserAccess(UserAccess userAccess) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Integer insertUserAccess(UserAccess userAccess) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteUserAccess(Integer id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -43,5 +55,7 @@ public class UserAccessDaoImpl implements UserAccessDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }
