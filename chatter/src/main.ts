@@ -11,3 +11,14 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
+var packageNames = [
+  '@angular/common',
+  '@angular/compiler',
+  '@angular/core',
+  '@angular/http',
+  '@angular/platform-browser',
+  '@angular/platform-browser-dynamic',
+  '@angular/router-deprecated',
+  '@angular/testing',
+  '@angular/upgrade',
+];
