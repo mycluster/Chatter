@@ -3,14 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ChatterboxComponent } from './chatterbox/chatterbox.component';
+import { UserComponent } from './user/user.component';
+import { MessageComponent } from './message/message.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatterboxComponent
+    ChatterboxComponent,
+    UserComponent,
+    MessageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
