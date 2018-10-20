@@ -8,7 +8,7 @@ public interface ClassRoleDao {
 
 	public List<ClassRole> selectAllClassRole();
 	public ClassRole selectClassRoleById(Integer id);
-	public Integer updateClassRole(ClassRole classRole);
-	public void insertClassRole(ClassRole classRole);
-	public Integer deleteClassRoleById(Integer id);
+	public ClassRole updateClassRole(ClassRole classRole);
+	public Integer insertClassRole(ClassRole classRole);
+	public void deleteClassRoleById(Integer id);
 }

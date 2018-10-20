@@ -139,7 +139,11 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		// return the updated ClassMembership
 		return cMembership;
 	}
-
+	/**
+	 * Takes in an id which corresponds to the primary key of a record in the
+	 * ClassMembership table and deletes the record with that primary key
+	 * from the table
+	 */
 	@Override
 	public void deleteClassMemebershipById(Integer id) {
 		// create a new session
@@ -171,7 +175,11 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 			logger.info("Session closed");
 		}
 	}
-
+	
+	/**
+	 * Takes in a ClassMembership object and inserts the values stored in the field of that object
+	 * into the ClassMembership table. Returns the primary key of the newly inserted record
+	 */
 	@Override
 	public Integer insertClassMemebership(ClassMembership classMembership) {
 		// create a new session
@@ -205,7 +213,11 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		logger.debug("id: " + id);
 		return id;
 	}
-
+	/**
+	 * Takes in a User object and selects all records in the ClassMembership table
+	 * with that user as the value in the user column and returns those records as a
+	 * list of ClassMembership Objects
+	 */
 	@Override
 	public List<ClassMembership> selectClassMembershipByUser(User user) {
 		// create a new session
@@ -246,7 +258,11 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		logger.debug("ClassMemberships: " + classMemberships);
 		return classMemberships;
 	}
-
+	
+	/**
+	 * Takes in a Cls object and returns as a list of ClassMembership objects all
+	 * records in the ClassMembership table with that Cls in their cls column
+	 */
 	@Override
 	public List<ClassMembership> selectClassMembershipByClass(Cls cls) {
 		// create a new session
@@ -288,6 +304,11 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		return classMemberships;
 	}
 
+	/**
+	 * Takes in a User object and a Cls object and returns the record in the
+	 * ClassMembership table with that Cls and User value. Only one record is
+	 * returned because a User can only have one class membership per class
+	 */
 	@Override
 	public ClassMembership getUserMembershipOfClass(User user, Cls cls) {
 		// create new session
