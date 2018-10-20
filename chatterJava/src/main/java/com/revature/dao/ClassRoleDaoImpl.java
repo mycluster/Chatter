@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -180,14 +181,36 @@ public class ClassRoleDaoImpl implements ClassRoleDao {
 		Session session = HibernateUtil.getSession();
 		// create a null Transaction reference
 		Transaction tx = null;
+		// create a null reference to a Query
+		Query membershipQuery = null;
+		// create an HQL string
+		String membershipHql = "UPDATE ClassMembership SET role = null WHERE role = :role";
+		
 		logger.info("Deleting ClassRole via DAO");
 		logger.debug("With ID: " + id);
 		try {
 			// begin the transaction
 			tx = session.beginTransaction();
 			logger.info("Beginning transaction");
+			
+			// retrieve the role to be deleted
+			ClassRole role = (ClassRole) session.get(ClassRole.class, id);
+			logger.info("ClassRole to be deleted has been retrieved");
+			
+			//generate the query
+			membershipQuery = session.createQuery(membershipHql);
+			logger.info("Membership query generated");
+			
+			//set the role parameter
+			membershipQuery.setParameter("role", role);
+			logger.info("Role parameter set");
+			
+			// update the classMemberships
+			membershipQuery.executeUpdate();
+			logger.info("Memberships updated");
+			
 			// delete the ClassRole
-			session.delete(session.get(ClassRole.class, id));
+			session.delete(role);
 			logger.info("ClassRole deleted");
 			// commit the changes
 			tx.commit();
