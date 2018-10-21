@@ -1,5 +1,5 @@
 import { ChatterboxServer } from './chatterBox-server';
-
+//creates a new chatterbox server
 let app = new ChatterboxServer().getApp();
-
-export { app };
+//exports app for injection into the page
+export { app };  
