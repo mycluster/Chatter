@@ -1,8 +1,7 @@
 import { createServer, Server } from 'http';
 import * as express from 'express';
 import * as socketIo from 'socket.io';
-import * as io from 'socket.io-client';
-import { Chatterbox } from './chatterbox/chatterbox.component';
+
 
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
