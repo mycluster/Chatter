@@ -7,6 +7,7 @@ import { UserComponent } from './user/user.component';
 import { MessageComponent } from './message/message.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './shared/shared.module';
+import { ChatModule } from './chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    ChatModule
   ],
   providers: [],
   bootstrap: [AppComponent]
