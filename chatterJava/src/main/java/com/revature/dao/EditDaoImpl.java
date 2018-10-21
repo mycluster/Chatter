@@ -25,7 +25,7 @@ public class EditDaoImpl implements EditDao {
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a Edit object
 		Edit edit = null;
-		logger.info("Selecting Edit by id");
+		logger.info("Selecting Edit by id via DAO");
 		logger.info("With id" + id);
 
 		try {
@@ -92,7 +92,7 @@ public class EditDaoImpl implements EditDao {
 		// create a null reference to a Edit
 		Edit ed = null;
 
-		logger.info("Updating Edit");
+		logger.info("Updating Edit via DAO");
 		logger.debug("Edit: " + edit.toString());
 		try {
 			// begin the transaction

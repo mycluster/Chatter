@@ -62,7 +62,7 @@ public class AccessLevelDaoImpl implements AccessLevelDao {
 
 		// make a null reference to an accessLevel
 		AccessLevel accessLevel = null;
-		logger.info("Selecting AccessLevel by id");
+		logger.info("Selecting AccessLevel by id via DAO");
 		logger.debug("With id" + id);
 
 		try {
@@ -98,7 +98,7 @@ public class AccessLevelDaoImpl implements AccessLevelDao {
 		// create a null reference to an AccessLevel
 		AccessLevel aLevel = null;
 
-		logger.info("Updating AccessLevel");
+		logger.info("Updating AccessLevel via DAO");
 		logger.debug("AccessLevel " + accessLevel.toString());
 
 		try {

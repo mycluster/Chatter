@@ -56,7 +56,7 @@ public class ActivationDaoImpl implements ActivationDao {
 
 		// make a null reference to an activation
 		Activation activation = null;
-		logger.info("Selecting Activation by id");
+		logger.info("Selecting Activation by id via DAO");
 		logger.debug("With id" + id);
 
 		try {
@@ -92,7 +92,7 @@ public class ActivationDaoImpl implements ActivationDao {
 		// create a null reference to an Activation
 		Activation a = null;
 
-		logger.info("Updating Activation");
+		logger.info("Updating Activation via DAO");
 		logger.debug("Activation :" + activation.toString());
 
 		try {

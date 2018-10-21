@@ -53,7 +53,7 @@ public class ClassRoleDaoImpl implements ClassRoleDao {
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a ClassRole object
 		ClassRole classRole = null;
-		logger.info("Selecting ClassRole by id");
+		logger.info("Selecting ClassRole by id via DAO");
 		logger.info("With id" + id);
 
 		try {
@@ -89,7 +89,7 @@ public class ClassRoleDaoImpl implements ClassRoleDao {
 		// create a null reference to a ClassRole
 		ClassRole cRole = null;
 
-		logger.info("Updating ClassRole");
+		logger.info("Updating ClassRole via DAO");
 		logger.debug("ClassRole: " + classRole.toString());
 		try {
 			// begin the transaction
@@ -215,6 +215,7 @@ public class ClassRoleDaoImpl implements ClassRoleDao {
 			logger.info("ClassRole deleted");
 			// commit the changes
 			tx.commit();
+			logger.info("Changes committed");
 		} catch (HibernateException e) {
 			// if a Hibernate Exception is triggered, catch
 			// it and log it

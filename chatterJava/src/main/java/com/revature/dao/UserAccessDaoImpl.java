@@ -62,7 +62,7 @@ public class UserAccessDaoImpl implements UserAccessDao {
 
 		// make a null reference to a UserAccess
 		UserAccess userAccess = null;
-		logger.info("Selecting UserAccess by id");
+		logger.info("Selecting UserAccess by id via DAO");
 		logger.debug("With id" + id);
 
 		try {
@@ -98,7 +98,7 @@ public class UserAccessDaoImpl implements UserAccessDao {
 		// create a null reference to a UserAccess
 		UserAccess uAccess = null;
 
-		logger.info("Update UserAccess");
+		logger.info("Update UserAccess via DAO");
 		logger.debug("UserAccess :" + userAccess.toString());
 		try {
 			// begin the transaction
@@ -235,7 +235,7 @@ public class UserAccessDaoImpl implements UserAccessDao {
 		// create a null reference to a list of UserAccesses
 		List<UserAccess> userAccesses = null;
 
-		logger.info("Get UserAccess by User");
+		logger.info("Get UserAccess by User via DAO");
 		logger.debug("User :" + user.toString());
 
 		try {
@@ -278,7 +278,7 @@ public class UserAccessDaoImpl implements UserAccessDao {
 		// create null reference to a list of UserAccesses
 		List<UserAccess> userAccesses = null;
 
-		logger.info("Getting UserAccesses by Note");
+		logger.info("Getting UserAccesses by Note via DAO");
 		logger.debug("Note: " + note.toString());
 		try {
 			// get a new criteria from the session
@@ -319,7 +319,7 @@ public class UserAccessDaoImpl implements UserAccessDao {
 		// create null reference to a list of UserAccesses
 		List<UserAccess> userAccesses = null;
 
-		logger.info("Getting UserAccesses by User and Access");
+		logger.info("Getting UserAccesses by User and Access via DAO");
 		logger.debug("User: " + user.toString());
 		logger.debug("Access: " + access.toString());
 		try {

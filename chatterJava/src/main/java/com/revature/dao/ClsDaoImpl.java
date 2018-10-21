@@ -55,7 +55,7 @@ public class ClsDaoImpl implements ClsDao {
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a Cls object
 		Cls cls = null;
-		logger.info("Selecting Cls by id");
+		logger.info("Selecting Cls by id via DAO");
 		logger.info("With id" + id);
 
 		try {
@@ -202,7 +202,7 @@ public class ClsDaoImpl implements ClsDao {
 		// create a null reference to a Cls
 		Cls c = null;
 
-		logger.info("Updating Cls");
+		logger.info("Updating Cls via DAO");
 		logger.debug("Cls: " + cls.toString());
 		try {
 			// begin the transaction

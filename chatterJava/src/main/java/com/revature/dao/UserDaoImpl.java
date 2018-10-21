@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a User object
 		User user = null;
-		logger.info("Selecting User by id");
+		logger.info("Selecting User by id via DAO");
 		logger.info("With id" + id);
 
 		try {
@@ -92,7 +92,7 @@ public class UserDaoImpl implements UserDao {
 		// create a null reference to a user
 		User user = null;
 
-		logger.info("Get User by Username");
+		logger.info("Get User by Username via DAO");
 		logger.debug("Username :" + username);
 
 		try {
@@ -101,12 +101,12 @@ public class UserDaoImpl implements UserDao {
 			logger.info("Query generated");
 
 			// set the user parameter
-			query.setParameter("username", user);
+			query.setParameter("username", username);
 			logger.info("Parameter set");
 
 			// attempt to execute the query
 			user = (User) query.uniqueResult();
-			logger.info("Useres retrieved");
+			logger.info("Users retrieved");
 		} catch (HibernateException e) {
 			// if a Hibernate Exception is triggered, catch
 			// it and log it
@@ -269,6 +269,7 @@ public class UserDaoImpl implements UserDao {
 			logger.info("User deleted");
 			// commit the changes
 			tx.commit();
+			logger.info("Changes committed");
 		} catch (HibernateException e) {
 			// if a Hibernate Exception is triggered, catch
 			// it and log it
@@ -299,7 +300,7 @@ public class UserDaoImpl implements UserDao {
 		// create a null reference to a User
 		User u = null;
 
-		logger.info("Updating User");
+		logger.info("Updating User via DAO");
 		logger.debug("User: " + user.toString());
 		try {
 			// begin the transaction

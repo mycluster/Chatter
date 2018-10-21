@@ -59,7 +59,7 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a ClassMembership object
 		ClassMembership classMembership = null;
-		logger.info("Selecting ClassMembership by id");
+		logger.info("Selecting ClassMembership by id via DAO");
 		logger.info("With id" + id);
 
 		try {
@@ -96,7 +96,7 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		// create a null reference to a ClassMembership
 		ClassMembership cMembership = null;
 
-		logger.info("Updating ClassMembership");
+		logger.info("Updating ClassMembership via DAO");
 		logger.debug("ClassMembership: " + classMembership.toString());
 		try {
 			// begin the transaction
@@ -229,7 +229,7 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		// create a null reference to a list of ClassMemberships
 		List<ClassMembership> classMemberships = null;
 
-		logger.info("Get ClassMembership by User");
+		logger.info("Get ClassMembership by User via DAO");
 		logger.debug("User :" + user.toString());
 
 		try {
@@ -274,7 +274,7 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		// create a null reference to a list of ClassMemberships
 		List<ClassMembership> classMemberships = null;
 
-		logger.info("Get ClassMembership by Class");
+		logger.info("Get ClassMembership by Class via DAO");
 		logger.debug("Cls :" + cls.toString());
 
 		try {
@@ -318,7 +318,7 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 		// create null reference to a list of ClassMemberships
 		ClassMembership classMembership = null;
 
-		logger.info("Getting ClassMemberships by Cls and User");
+		logger.info("Getting ClassMemberships by Cls and User via DAO");
 		logger.debug("Cls: " + cls.toString());
 		logger.debug("User: " + user.toString());
 		try {

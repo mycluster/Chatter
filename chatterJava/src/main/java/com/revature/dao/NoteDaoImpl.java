@@ -55,7 +55,7 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a Note object
 		Note note = null;
-		logger.info("Selecting Note by id");
+		logger.info("Selecting Note by id via DAO");
 		logger.info("With id" + id);
 
 		try {
@@ -168,7 +168,7 @@ public class NoteDaoImpl implements NoteDao {
 		// create a null reference to a Note
 		Note n = null;
 
-		logger.info("Updating Note");
+		logger.info("Updating Note via DAO");
 		logger.debug("Note: " + note.toString());
 		try {
 			// begin the transaction
@@ -227,7 +227,7 @@ public class NoteDaoImpl implements NoteDao {
 		// create a null reference to a list of Notes
 		List<Note> notes = null;
 
-		logger.info("Get Note by Owner");
+		logger.info("Get Note by Owner via DAO");
 		logger.debug("Owner :" + owner.toString());
 
 		try {

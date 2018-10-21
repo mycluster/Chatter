@@ -23,4 +23,10 @@ public interface MessageDao {
 	public List<Message> selectMessageBySenderAndReceiver(User sender, User receiver);
 	// we want to be able to select the n most recent messages between a sender and a receiver
 	public List<Message> selectNMostRecentBySenderAndReceiver(User sender, User receiver, Integer n);
+	
+	// we might also want to select by conversation
+	// ie we care about communication between two users
+	// regardless of which was the sender or reciever
+	public List <Message> selectMessageByConversation(User user1, User user2);
+	public List <Message> selectNMostRecentByConversation(User user1, User user2, Integer n);
 }

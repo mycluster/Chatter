@@ -55,7 +55,7 @@ public class NoteTypeDaoImpl implements NoteTypeDao {
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a NoteType object
 		NoteType noteType = null;
-		logger.info("Selecting NoteType by id");
+		logger.info("Selecting NoteType by id via DAO");
 		logger.info("With id" + id);
 
 		try {
@@ -91,7 +91,7 @@ public class NoteTypeDaoImpl implements NoteTypeDao {
 		// create a null reference to a NoteType
 		NoteType nType = null;
 
-		logger.info("Updating NoteType");
+		logger.info("Updating NoteType via DAO");
 		logger.debug("NoteType: " + noteType.toString());
 		try {
 			// begin the transaction

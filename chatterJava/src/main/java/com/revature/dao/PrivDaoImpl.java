@@ -54,7 +54,7 @@ public class PrivDaoImpl implements PrivDao {
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a Priv object
 		Priv priv = null;
-		logger.info("Selecting Priv by id");
+		logger.info("Selecting Priv by id via DAO");
 		logger.info("With id" + id);
 
 		try {
@@ -188,7 +188,7 @@ public class PrivDaoImpl implements PrivDao {
 		// create a null reference to a Priv
 		Priv p = null;
 
-		logger.info("Updating Priv");
+		logger.info("Updating Priv via DAO");
 		logger.debug("Priv: " + priv.toString());
 		try {
 			// begin the transaction
