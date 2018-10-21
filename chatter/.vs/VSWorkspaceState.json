@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client",
+    "\\client\\e2e",
+    "\\client\\e2e\\src",
+    "\\client\\e2e\\src\\app",
+    "\\server",
+    "\\server\\src",
+    "\\server\\src\\model"
+  ],
+  "SelectedNode": "\\client\\e2e\\src\\app\\app.component.html",
+  "PreviewInSolutionExplorer": false
+}
