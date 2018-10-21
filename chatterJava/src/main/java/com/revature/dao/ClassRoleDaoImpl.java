@@ -173,7 +173,8 @@ public class ClassRoleDaoImpl implements ClassRoleDao {
 	
 	/**
 	 * Takes an Integer that corresponds to the primary key of an object in the ClassRole table.
-	 * Then deletes that record from the table.
+	 * Then deletes that record from the table. Sets the ClassRole foriegn key of ClassMembership
+	 * records to null if the current foreign key corresponds to the record to be deleted
 	 */
 	@Override
 	public void deleteClassRoleById(Integer id) {
