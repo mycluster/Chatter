@@ -1,0 +1,21 @@
+<h1>Enter a note</h1>
+<form #starterForm="ngForm" (ngSubmit)="onSubmit()">
+
+
+      <textarea rows="4" cols="100"  name="note"
+      #note="ngModel"
+      [(ngModel)]="user.note"
+      required></textarea>
+
+
+    <br />
+    <span *ngIf="!note.valid">Note cannot remain empty</span>
+    <br />
+    <button class="btn btn-default" [disabled]="!starterForm.valid">Submit</button>
+    <br /><br />
+    {{ message }}
+    <br />
+    <b>Valid:</b> {{ note.valid}}
+    <br />
+    <b>Changed:</b> {{ note.touched }}
+</form>
