@@ -6,13 +6,15 @@ import { Event } from './shared/model/event';
 import { Message } from './shared/model/message';
 import { User } from './shared/model/user';
 import { SocketService } from './shared/services/socket.service';
+import { DialogUserComponent } from './dialog-user/dialog-user.component';
+import { DialogUserType } from './dialog-user/dialog-user-type';
 
 const WSP = 'https://tools.ietf.org/html/rfc6455';
 
 
 
 @Component({
-  selector: 'app-chat',
+  selector: 'tcc-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
@@ -22,7 +24,7 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
   user: User;
   messages: Message[] = [];
   ioConnection: any;
-  dialogRef: MatDialogRef<DialogUser> | null;
+  dialogRef: MatDialogRef<DialogUserComponent> | null;
   defaultDialogUserParams: any = {
     disableClose: true,
     data: {
@@ -41,7 +43,7 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.initModel();
     setTimeout(() => {
-      this.openUserPopup(this.this.defaultDialogUserParams);
+      this.openUserPopup(this.defaultDialogUserParams);
     }, 0);
   }
 
@@ -61,7 +63,7 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
   private initModel(): void {
     const randomId = this.getRandomId();
     this.user = {
-      id: randomId;
+      id: randomId,
       //add avatar
     };
   }
