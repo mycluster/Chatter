@@ -9,29 +9,29 @@ public class UserDto {
 	private String fName;
 	private String lName;
 	private Priv priv;
-	private Activation acvtivation;
+	private Activation activation;
 	public UserDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserDto(Integer id, String username, String fName, String lName, Priv priv, Activation acvtivation) {
+	public UserDto(Integer id, String username, String fName, String lName, Priv priv, Activation activation) {
 		this.id = id;
 		this.username = username;
 		this.fName = fName;
 		this.lName = lName;
 		this.priv = priv;
-		this.acvtivation = acvtivation;
+		this.activation = activation;
 	}
 	@Override
 	public String toString() {
 		return "UserDto [id=" + id + ", username=" + username + ", fName=" + fName + ", lName=" + lName + ", priv="
-				+ priv + ", acvtivation=" + acvtivation + "]";
+				+ priv + ", activation=" + activation + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((acvtivation == null) ? 0 : acvtivation.hashCode());
+		result = prime * result + ((activation == null) ? 0 : activation.hashCode());
 		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lName == null) ? 0 : lName.hashCode());
@@ -48,10 +48,10 @@ public class UserDto {
 		if (getClass() != obj.getClass())
 			return false;
 		UserDto other = (UserDto) obj;
-		if (acvtivation == null) {
-			if (other.acvtivation != null)
+		if (activation == null) {
+			if (other.activation != null)
 				return false;
-		} else if (!acvtivation.equals(other.acvtivation))
+		} else if (!activation.equals(other.activation))
 			return false;
 		if (fName == null) {
 			if (other.fName != null)
@@ -110,12 +110,11 @@ public class UserDto {
 	public void setPriv(Priv priv) {
 		this.priv = priv;
 	}
-	public Activation getAcvtivation() {
-		return acvtivation;
+	public Activation getActivation() {
+		return activation;
 	}
-	public void setAcvtivation(Activation acvtivation) {
-		this.acvtivation = acvtivation;
+	public void setActivation(Activation activation) {
+		this.activation = activation;
 	}
-	
 	
 }

@@ -17,8 +17,8 @@ import com.revature.util.ActivationUtil;
 
 public class UserService {
 	private final static Logger logger = Logger.getLogger(UserService.class);
-	private UserDao ud;
-	private ActivationDao ad;
+	private static UserDao ud;
+	private static ActivationDao ad;
 
 	/**
 	 * 
@@ -30,7 +30,7 @@ public class UserService {
 	 *         stored password in the database for the User in question. If returns
 	 *         true if the passwords match and false otherwise
 	 */
-	public Boolean checkPassword(UserDto user, String password) {
+	public static Boolean checkPassword(UserDto user, String password) {
 		// create a new UserDao
 		ud = new UserDaoImpl();
 		logger.info("UserDaoImpl created");
@@ -61,7 +61,7 @@ public class UserService {
 	 * @return UserDto that contains the values associated with the record in the
 	 *         User table with the corresponding username
 	 */
-	public UserDto getUserDtoByUsername(String username) {
+	public static UserDto getUserDtoByUsername(String username) {
 		// create a new UserDao
 		ud = new UserDaoImpl();
 		logger.info("UserDaoImpl created");
@@ -90,7 +90,7 @@ public class UserService {
 	 * @param user
 	 * @return UserDto
 	 */
-	public UserDto updateUserDto(UserDto user) {
+	public static UserDto updateUserDto(UserDto user) {
 		// create a new UserDao
 		ud = new UserDaoImpl();
 		logger.info("UserDaoImpl created");
@@ -106,7 +106,7 @@ public class UserService {
 		// id values must already be equal because of how
 		// the User object was retrieved
 		usr.setUsername(user.getUsername());
-		usr.setActivation(user.getAcvtivation());
+		usr.setActivation(user.getActivation());
 		usr.setfName(user.getfName());
 		usr.setlName(user.getlName());
 		logger.info("User object modified to match UserDto");
@@ -138,7 +138,7 @@ public class UserService {
 	 * @param password
 	 * @return The UserDto created from the record of the freshly inserted User
 	 */
-	public UserDto insertNewUserDto(String username, String fName, String lName, String password, Priv priv) {
+	public static UserDto insertNewUserDto(String username, String fName, String lName, String password, Priv priv) {
 		// create a new UserDaoImpl
 		ud = new UserDaoImpl();
 		logger.info("UserDaoImpl created");
@@ -188,7 +188,7 @@ public class UserService {
 	 * 
 	 * @param id
 	 */
-	public void deleteUserDtoById(Integer id) {
+	public static void deleteUserDtoById(Integer id) {
 		// create a new UserDaoImpl
 		ud = new UserDaoImpl();
 		logger.info("UserDaoImpl created");
@@ -203,7 +203,7 @@ public class UserService {
 	 * 
 	 * @return
 	 */
-	public List<UserDto> selectAllUserDto() {
+	public static List<UserDto> selectAllUserDto() {
 		// create a new UserDaoImpl
 		ud = new UserDaoImpl();
 		logger.info("UserDaoImpl created");
@@ -224,15 +224,92 @@ public class UserService {
 			UserDto userDto = new UserDto(u.getId(), u.getUsername(), u.getfName(), u.getlName(), u.getPriv(),
 					u.getActivation());
 			logger.info("UserDto created");
-			logger.debug("UserDto: "+ userDto);
-			
+			logger.debug("UserDto: " + userDto);
+
 			// adding UserDto to list
 			logger.info("Adding UserDto to list");
 			userDtos.add(userDto);
 		}
-		
+
 		// return the list of UserDtos
 		logger.info("Returning UserDto list");
 		return userDtos;
+	}
+
+	/**
+	 * Takes in a User object and returns a UserDto object that corresponds to it
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public static UserDto createUserDtoFromUser(User user) {
+		logger.info("Creating UserDto from User");
+		logger.debug("User: " + user);
+
+		// create the UserDto
+		UserDto usr = new UserDto(user.getId(), user.getUsername(), user.getfName(), user.getlName(), user.getPriv(),
+				user.getActivation());
+		logger.info("UserDto created");
+		logger.debug("UserDto: " + usr);
+		logger.info("Returning UserDto");
+		// return the UserDto
+		return usr;
+	}
+
+	/**
+	 * Takes in an Integer and returns the record from the User table with that
+	 * value as the primary key as a UserDto
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public static UserDto getUserDtoById(Integer id) {
+		// create a new UserDaoImpl
+		ud = new UserDaoImpl();
+		logger.info("UserDaoImpl created");
+
+		// get the record that with id as the primary key as a User Object
+		User user = ud.selectUserById(id);
+		logger.info("User selected from database");
+		logger.debug("User: " + user);
+		// create the UserDto
+		UserDto usr = new UserDto(user.getId(), user.getUsername(), user.getfName(), user.getlName(), user.getPriv(),
+				user.getActivation());
+		logger.info("UserDto created");
+		logger.debug("UserDto: " + usr);
+		logger.info("Returning UserDto");
+		// return the UserDto
+		return usr;
+
+	}
+
+	public static UserDto changeUserDtoPassword(UserDto user, String password) {
+		// create a new UserDao
+		ud = new UserDaoImpl();
+		logger.info("UserDaoImpl created");
+
+		// get the User object that matches from the database
+		User usr = ud.selectUserById(user.getId());
+		logger.info("Retrieved corresponding User from database");
+		logger.debug("User: " + usr);
+		logger.debug("UserDto: " + user);
+
+		// update the password field of the User object
+		usr.setPassword(password);
+		logger.info("User object modified to match UserDto");
+
+		// update the User
+		User updatedUsr = ud.updateUser(usr);
+		logger.info("User object updated, fresh User object returned");
+
+		// create the new UserDto to be returned
+		UserDto updated = new UserDto(updatedUsr.getId(), updatedUsr.getUsername(), updatedUsr.getfName(),
+				updatedUsr.getlName(), updatedUsr.getPriv(), updatedUsr.getActivation());
+		logger.info("UserDto created");
+		logger.debug("Updated UserDto: " + updated);
+
+		// return the UserDto
+		logger.info("Returning updated UserDto");
+		return updated;
 	}
 }
