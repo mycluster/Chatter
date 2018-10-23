@@ -1,11 +1,15 @@
 <div *ngIf="!submitted">
+
     <form [formGroup]="userForm" (ngSubmit)="submit()">
+
         <div *ngFor="let prop of formModelProps">
+
             <div class="form-group" *ngIf="prop !== 'id'">
                 <label for="name">{{ prop | cameltotitle }}</label>
                 <input type="text" class="form-control" [formControlName]="prop" />
                 <div class="alert alert-danger" [hidden]="userForm.get(prop).valid">{{ prop }} is required</div>
             </div>
+            
         </div>
         <button type="submit" class="btn btn-default" [disabled]="!userForm.valid">Submit</button>
     </form>

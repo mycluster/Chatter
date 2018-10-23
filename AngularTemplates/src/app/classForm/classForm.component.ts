@@ -13,7 +13,7 @@ export class ClassFormComponent implements OnInit {
 
   ngOnInit() {
     this.subjects = ['English', 'Math',
-                'Computer Science', 'Basket weaving'];
+                'Computer Science', 'Basket weaving', 'Advanced Basket Weaving (Underwater)'];
   }
 
   onSubmit(form: any)  {

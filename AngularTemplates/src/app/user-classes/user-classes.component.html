@@ -1,21 +1,16 @@
 <div class="container">
-  <h2>My classes</h2>
+<div class="form-group">
+  <label for="subject">Subject</label>
 
-  <table class="table table-condensed">
-    <thead>
-      <tr>
-        <th>ClassName</th>
-        <th>Created By</th>
-        <th>Subject</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Class1</td>
-        <td>SUPERUSER</td>
-        <td>Basketweaving</td>
-      </tr>
 
-    </tbody>
-  </table>
+  <select class="form-control" name="subject" ngModel #subject="ngModel" required>
+    <option *ngFor="let p of classes" [value]="p">{{ p }}</option>
+  </select>
+
+  
+  <div class="alert alert-danger" [hidden]="subject.valid || subject.pristine">Subject is required</div>
+</div>
+
+<button type="submit" class="btn btn-default" [disabled]="!classForm.valid">Submit</button>
+
 </div>
