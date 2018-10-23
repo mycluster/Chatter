@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 //components
 import { AppComponent } from './app.component';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 =======
@@ -15,11 +16,18 @@ import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import{AppRoutingModule,routingComponents} from './app-routing.module';
 >>>>>>> 3adc630d7918d3d082ae67f55879c16bfbfdf006
+=======
+import { ChatterboxComponent } from './chatterbox/chatterbox.component';
+import { UserComponent } from './user/user.component';
+import { MessageComponent } from './message/message.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+>>>>>>> c2e845d3fabe0667683b77b0ee1740c25ebfdd86
 
 //components
 @NgModule({
   declarations: [
     AppComponent,
+<<<<<<< HEAD
     LoginComponent,
 <<<<<<< HEAD
     RegisterComponent
@@ -35,6 +43,15 @@ import{AppRoutingModule,routingComponents} from './app-routing.module';
     ReactiveFormsModule,
     AppRoutingModule
    
+=======
+    ChatterboxComponent,
+    UserComponent,
+    MessageComponent
+  ],
+  imports: [
+    BrowserModule,
+    NgbModule
+>>>>>>> c2e845d3fabe0667683b77b0ee1740c25ebfdd86
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

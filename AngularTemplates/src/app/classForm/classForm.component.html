@@ -1,0 +1,63 @@
+<div class="container">
+  <div *ngIf="!submitted">
+    <h1>Create a Class</h1>
+
+
+
+    <form #classForm="ngForm" (ngSubmit)="onSubmit(classForm.value)">
+
+      <div class="form-group">
+        <label for="name">User Name</label>
+        <input type="text" class="form-control" name="name" ngModel #name="ngModel" required>
+        <div class="alert alert-danger" [hidden]="name.valid || name.pristine">Name is required</div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="className">Class Name</label>
+        <input type="text" class="form-control" name="className" ngModel #className="ngModel" required>
+        <div class="alert alert-danger" [hidden]="className.valid || className.pristine">Class Name is required</div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select class="form-control" name="subject" ngModel #subject="ngModel" required>
+          <option *ngFor="let p of subjects" [value]="p">{{ p }}</option>
+        </select>
+        <div class="alert alert-danger" [hidden]="subject.valid || subject.pristine">Subject is required</div>
+      </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!classForm.valid">Submit</button>
+
+    </form>
+
+    
+<!--END OF USER INPUT -->
+  </div>
+  <div *ngIf="submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-md-2">Name</div>
+      <div class="col-md-10 pull-left">{{ form.name }}</div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-2">Class</div>
+      <div class="col-md-10 pull-left">{{ form.className }}</div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-2">subject</div>
+      <div class="col-md-10 pull-left">{{ form.subject }}</div>
+    </div>
+    <br />
+    Raw output from form.value:
+    <br />
+    {{ form | json }}
+    <br /><br />
+    <button class="btn btn-default" (click)="submitted=false">Edit</button>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <a routerLink="/noteform"><img src="assets/angular.png" class="logo" /></a>
+    </div>
+    <ul class="nav navbar-nav nav-pills">
+      <li routerLinkActive="active">
+        <a routerLink="/noteform">Notes</a>
+      </li>
+
+      <li routerLinkActive="active">
+        <a routerLink="/classform">Create a class</a>
+      </li>
+
+
+      <li routerLinkActive="active">
+        <a routerLink="/userclasses">My Classes</a>
+      </li>
+
+      <li routerLinkActive="active">
+        <a routerLink="/edituserform">Edit User</a>
+      </li>
+
+      <li routerLinkActive="active">
+        <a routerLink="/#">Chatterbox!</a>
+      </li>
+
+
+    </ul>
+
+    <div>
+      <button routerLink="/login" class="btn btn-default navbar-right" >Logout</button>
+    </div>
+    <div>
+
+    </div>
+  </nav>
+
+
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>

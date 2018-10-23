@@ -1,0 +1,17 @@
+<div style="text-align: center">
+  <img alt="Chatter Logo" src="/src/chatter-sm.png">
+</div>
+
+<div class="login">
+  <h3>Login</h3>
+  <form class="login_form" [formGroup]="loginForm" (ngSubmit)="login()" >
+    <label for="username">Username</label><br>
+    <input type="text" formControlName="username">
+    <br><br>
+    <label for="password">Password</label><br>
+    <input type="password" formControlName="password">
+    <br><br>
+    <button type="submit">Start Chattering</button>
+  </form>
+  <button routerLink="/register">Sign Up</button>
+</div>
