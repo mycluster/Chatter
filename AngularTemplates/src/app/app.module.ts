@@ -6,6 +6,7 @@ import { AppComponent }  from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CamelToTitlePipe } from './shared/camel-to-title.pipe';
+import { UserClassesComponent } from './user-classes/user-classes.component';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule ],

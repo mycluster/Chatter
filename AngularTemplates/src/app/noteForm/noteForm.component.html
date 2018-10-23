@@ -6,6 +6,8 @@
     <input type="text" class="form-control" name="noteName" ngModel #noteName="ngModel" [(ngModel)]="user.noteName" required>
     <div class="alert alert-danger" [hidden]="noteName.valid || noteName.pristine">Note Name is required</div>
   </div>
+
+  
       <textarea rows="4" cols="150"  name="note"
       #note="ngModel"
       [(ngModel)]="user.note"
