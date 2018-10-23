@@ -67,7 +67,7 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
     const randomId = this.getRandomId();
     this.user = {
       id: randomId,
-      //add avatar
+      avatar: `${WSP}/${randomId}.png`
     };
   }
 
@@ -83,8 +83,9 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
       .subscribe(() => {
         console.log('User has been disconnected');
       });
-
-  private getRandomId() {
+    }
+    
+  private getRandomId(): number {
       return Math.floor(Math.random() * (999999)) + 1;
     }
 
