@@ -2,52 +2,43 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="classes")
-public class Cls {
+@Table(name="class_categories")
+public class ClassCategory {
 	@Id
 	@Column(name="c_id")
-	@SequenceGenerator(sequenceName="CLASS_SEQ", name="class_seq")
-	@GeneratedValue(generator="class_seq", strategy=GenerationType.AUTO)
+	@SequenceGenerator(sequenceName="CLASS_CATEGORY_SEQ", name="class_category_seq")
+	@GeneratedValue(generator="class_category_seq", strategy=GenerationType.AUTO)
 	private Integer id;
 	
 	@Column(name="c_name")
 	private String name;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="c_category")
-	private ClassCategory category;
 
-	public Cls() {
+	public ClassCategory() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cls(Integer id, String name, ClassCategory category) {
+	public ClassCategory(Integer id, String name) {
 		this.id = id;
 		this.name = name;
-		this.category = category;
 	}
 
 	@Override
 	public String toString() {
-		return "Cls [id=" + id + ", name=" + name + ", category=" + category + "]";
+		return "ClassCategory [id=" + id + ", name=" + name + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -61,12 +52,7 @@ public class Cls {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cls other = (Cls) obj;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
+		ClassCategory other = (ClassCategory) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -95,14 +81,5 @@ public class Cls {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public ClassCategory getCategory() {
-		return category;
-	}
-
-	public void setCategory(ClassCategory category) {
-		this.category = category;
-	}
-	
 	
 }

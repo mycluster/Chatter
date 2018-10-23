@@ -213,10 +213,11 @@ public class ClsDaoImpl implements ClsDao {
 			c = (Cls) session.get(Cls.class, cls.getId());
 			logger.info("Cls retrieved from the database");
 
-			// set the name to match the input Cls
+			// set the name and category to match the input Cls
 			// we do not update id because they already match
 			// also, we should not be going around changing primary keys
 			c.setName(cls.getName());
+			c.setCategory(cls.getCategory());
 			logger.info("Cls from database updated");
 
 			// save the changes
