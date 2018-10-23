@@ -8,7 +8,7 @@ import { User } from './shared/model/user';
 import { SocketService } from './shared/services/socket.service';
 import { DialogUserComponent } from './dialog-user/dialog-user/dialog-user.component';
 import { DialogUserType } from './dialog-user/dialog-user/dialog-user-type';
-
+import { MessageService } from './shared/services/message.service';
 
 const WSP = 'https://tools.ietf.org/html/rfc6455';
 
@@ -43,7 +43,14 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
     constructor(private socketService: SocketService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.initModel();
+    //Retrieving most recent messages for display to user for past message history
+    this.messageService
+    .selectMostRecentMessage()
+    .subscribe(
+      data => {
+        this.messages = data;
+    }, error =>{ console.log("Messages cannot be loaded.")});
+   
     setTimeout(() => {
       this.openUserPopup(this.defaultDialogUserParams);
     }, 0);
