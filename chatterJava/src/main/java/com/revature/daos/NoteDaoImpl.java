@@ -179,7 +179,7 @@ public class NoteDaoImpl implements NoteDao {
 			n = (Note) session.get(Note.class, note.getId());
 			logger.info("Note retrieved from the database");
 
-			// set the type, location, and owner to match the input Note
+			// set the type, location, name, and owner to match the input Note
 			// we do not update id because they already match
 			// also, we should not be going around changing primary keys
 			// we don't need to manually update lastEdited because
@@ -187,6 +187,7 @@ public class NoteDaoImpl implements NoteDao {
 			n.setLocation(note.getLocation());
 			n.setOwner(note.getOwner());
 			n.setType(note.getType());
+			n.setName(note.getName());
 			logger.info("Note from database updated");
 
 			// save the changes

@@ -11,17 +11,15 @@ import com.revature.beans.AccessLevel;
 import com.revature.util.HibernateUtil;
 
 
-/**
- * 
- * @author kbarnes
- * 
- *         Returns a list of all AccessLevels in the database if there are none
- *         the returned List Reference is null
- * 
- */
+
 public class AccessLevelDaoImpl implements AccessLevelDao {
 	private final static Logger logger = Logger.getLogger(AccessLevelDaoImpl.class);
-
+	/**
+	 * 
+	 *         Returns a list of all AccessLevels in the database if there are none
+	 *         the returned List Reference is null
+	 * 
+	 */
 	@Override
 	public List<AccessLevel> selectAllAccessLevel() {
 		// create a new session
