@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -49,6 +50,7 @@ public class Message {
 	// we went to be able to tell when a message is sent, so  we're going to 
 	// automatically generate the sentAt time when a message is created without a
 	// specified sentAt value
+	@PrePersist
 	protected void onCreate() {
 		// create a java calendar instance
 		Calendar calendar = Calendar.getInstance();

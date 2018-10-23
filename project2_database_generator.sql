@@ -73,6 +73,7 @@ CREATE TABLE notes (
     ownr NUMBER(9),
     ty NUMBER(2),
     loc VARCHAR2(100),
+    last_edited TIMESTAMP,
     CONSTRAINT notes_pk PRIMARY KEY (n_id),
     CONSTRAINT notes_owner_fk FOREIGN KEY (ownr)
         REFERENCES usrs (u_id),
@@ -80,10 +81,19 @@ CREATE TABLE notes (
         REFERENCES note_types (n_id)
 );
 
+CREATE TABLE class_categories (
+    c_id NUMBER(3),
+    c_name VARCHAR(50),
+    CONSTRAINT class_categories_pk PRIMARY KEY (c_id)
+);
+
 CREATE TABLE classes (
     c_id NUMBER(9),
     c_name VARCHAR(50),
-    CONSTRAINT classes_pk PRIMARY KEY (c_id)
+    c_category NUMBER(3),
+    CONSTRAINT classes_pk PRIMARY KEY (c_id),
+    CONSTRAINT classes_category_fk FOREIGN KEY (c_category)
+        REFERENCES class_categories
 );
 
 CREATE TABLE class_roles (

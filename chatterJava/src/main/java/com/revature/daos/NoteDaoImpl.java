@@ -1,4 +1,4 @@
-package com.revature.dao;
+package com.revature.daos;
 
 import java.util.List;
 
@@ -182,6 +182,8 @@ public class NoteDaoImpl implements NoteDao {
 			// set the type, location, and owner to match the input Note
 			// we do not update id because they already match
 			// also, we should not be going around changing primary keys
+			// we don't need to manually update lastEdited because
+			// everytime a setter is called lastEdited is updated
 			n.setLocation(note.getLocation());
 			n.setOwner(note.getOwner());
 			n.setType(note.getType());
