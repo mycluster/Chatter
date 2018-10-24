@@ -7,15 +7,4 @@ if (environment.production) {
 }
 platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(function (err) { return console.error(err); });
-var packageNames = [
-    '@angular/common',
-    '@angular/compiler',
-    '@angular/core',
-    '@angular/http',
-    '@angular/platform-browser',
-    '@angular/platform-browser-dynamic',
-    '@angular/router-deprecated',
-    '@angular/testing',
-    '@angular/upgrade',
-];
 //# sourceMappingURL=main.js.map

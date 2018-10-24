@@ -6,6 +6,8 @@ DROP TABLE class_roles;
 DROP TABLE classes;
 DROP TABLE notes;
 DROP TABLE note_types;
+DROP TABLE messages;
+DROP TABLE edit_flags;
 DROP TABLE usrs;
 DROP TABLE activated;
 DROP TABLE privs;
@@ -38,6 +40,28 @@ CREATE TABLE usrs (
         REFERENCES activated (a_id)
 );
 
+CREATE TABLE edit_flags (
+    f_id NUMBER(1),
+    f_name VARCHAR2(20),
+    CONSTRAINT edit_flags_pk PRIMARY KEY (f_id)
+);
+
+CREATE TABLE messages (
+    m_id NUMBER(10),
+    sender NUMBER(9),
+    receiver NUMBER(9),
+    message VARCHAR2(500),
+    edited NUMBER(1),
+    sent_at TIMESTAMP,
+    CONSTRAINT messages_pk PRIMARY KEY (m_id),
+    CONSTRAINT messages_sender_fk FOREIGN KEY (sender)
+        REFERENCES usrs (u_id),
+    CONSTRAINT messages_receiver_fk FOREIGN KEY (receiver)
+        REFERENCES usrs (u_id),
+    CONSTRAINT messages_edit_fk FOREIGN KEY (edited)
+        REFERENCES edit_flags (f_id)
+);
+
 CREATE TABLE note_types (
     n_id NUMBER(2),
     n_name VARCHAR2(20),
@@ -49,6 +73,7 @@ CREATE TABLE notes (
     ownr NUMBER(9),
     ty NUMBER(2),
     loc VARCHAR2(100),
+    last_edited TIMESTAMP,
     CONSTRAINT notes_pk PRIMARY KEY (n_id),
     CONSTRAINT notes_owner_fk FOREIGN KEY (ownr)
         REFERENCES usrs (u_id),
@@ -56,10 +81,19 @@ CREATE TABLE notes (
         REFERENCES note_types (n_id)
 );
 
+CREATE TABLE class_categories (
+    c_id NUMBER(3),
+    c_name VARCHAR(50),
+    CONSTRAINT class_categories_pk PRIMARY KEY (c_id)
+);
+
 CREATE TABLE classes (
     c_id NUMBER(9),
     c_name VARCHAR(50),
-    CONSTRAINT classes_pk PRIMARY KEY (c_id)
+    c_category NUMBER(3),
+    CONSTRAINT classes_pk PRIMARY KEY (c_id),
+    CONSTRAINT classes_category_fk FOREIGN KEY (c_category)
+        REFERENCES class_categories
 );
 
 CREATE TABLE class_roles (

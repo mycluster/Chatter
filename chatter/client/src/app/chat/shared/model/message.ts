@@ -1,8 +1,13 @@
 import { User } from './user';
 import { Action } from './action';
+import { Timestamp } from 'rxjs';
 
-export interface Message {
-  from?: User;
-  content?: any;
-  action?: Action;
+export class Message{
+  constructor(
+  public id: number,
+  public message: string,
+  public sender: string,
+  public receiver: string,
+
+  ){}
 }

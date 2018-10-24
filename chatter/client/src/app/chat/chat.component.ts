@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MatList, MatListItem } from '@angular/material';
-
 import { Action } from './shared/model/action';
 import { Event } from './shared/model/event';
 import { Message } from './shared/model/message';
@@ -9,6 +8,12 @@ import { SocketService } from './shared/services/socket.service';
 import { DialogUserComponent } from './dialog-user/dialog-user/dialog-user.component';
 import { DialogUserType } from './dialog-user/dialog-user/dialog-user-type';
 import { MessageService } from './shared/services/message.service';
+
+
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { stringify } from '@angular/compiler/src/util';
+import { MessageInter } from './shared/model/message_interface';
+import { UserInter } from './shared/model/user_interface';
 
 const WSP = 'https://tools.ietf.org/html/rfc6455';
 
@@ -22,8 +27,13 @@ const WSP = 'https://tools.ietf.org/html/rfc6455';
 
 export class ChatterboxComponent implements OnInit, AfterViewInit {
   action = Action;
+  username: string;
   user: User;
   messages: Message[] = [];
+  newMessage = {
+    message: ""
+  }
+  feedback: string ="";
   messageContent: string;
   ioConnection: any;
   dialogRef: MatDialogRef<DialogUserComponent> | null;
@@ -40,17 +50,11 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
   @ViewChildren(MatListItem, { read: ElementRef }) matListItems: QueryList<MatListItem>;
 
 
-    constructor(private socketService: SocketService, public dialog: MatDialog) { }
+  constructor(private socketService: SocketService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    //Retrieving most recent messages for display to user for past message history
-    this.messageService
-    .selectMostRecentMessage()
-    .subscribe(
-      data => {
-        this.messages = data;
-    }, error =>{ console.log("Messages cannot be loaded.")});
-   
+    this.initModel();
+    // Using timeout due to https://github.com/angular/angular/issues/14748
     setTimeout(() => {
       this.openUserPopup(this.defaultDialogUserParams);
     }, 0);
@@ -63,6 +67,7 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
     });
   }
 
+
   private scrollToBottom(): void {
     try {
       this.matList.nativeElement.scrollTop = this.matList.nativeElement.scrollHeight;
@@ -71,13 +76,29 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
   }
 
   private initModel(): void {
-    const randomId = this.getRandomId();
-    this.user = {
-      id: randomId,
-      avatar: `${WSP}/${randomId}.png`
-    };
+    this.MessageService.selectAllMessages.subscribe(
+      data =>{
+        this.messages = data;
+      },
+      error =>{ console.log("Messages could not be loaded.")});
+
+    this.insertMessage();
+    
   }
 
+  insertMessage(){
+    this.feedback = "";
+    this.MessageService.insertMessage(this.newMessage.message)
+    .subscribe(
+      message => {
+        this.feedback = message['message'];
+        this.ngOnInit();
+      },
+      error => {
+        console.log(error.message);
+      }
+    )
+  };
   private initIoConnection(): void {
     this.socketService.initSocket();
 
@@ -90,16 +111,16 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
       .subscribe(() => {
         console.log('User has been disconnected');
       });
-    }
     
-  private getRandomId(): number {
-      return Math.floor(Math.random() * (999999)) + 1;
-    }
+  }
+  // private getRandomId(): number {
+  //     return Math.floor(Math.random() * (999999)) + 1;
+  //   }
 
   public onClickUserInfo() {
     this.openUserPopup({
       data: {
-        username: this.user.name,
+        username: this.user.username,
         title: 'Edit details',
         dialogType: DialogUserType.EDIT
       }
@@ -112,8 +133,9 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
       if (!paramsDialog) {
         return;
       }
+    
 
-      this.user.name = paramsDialog.username;
+      this.user.username = paramsDialog.username;
       if (paramsDialog.dialogType === DialogUserType.NEW) {
         this.initIoConnection();
         this.sendNotification(paramsDialog, Action.JOINED);
@@ -121,8 +143,18 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
         this.sendNotification(paramsDialog, Action.RENAME);
       }
   
-    });
-  }
+
+  });
+}
+  //Commented out in order to test base functionality first
+  // public selectNMostRecentByConversation(params): string {
+  // this.MessageService.selectNMostRecentByConversation()
+  //   .subscribe(
+  //     data => {
+  //       this.user = {username: data.username};
+  //       this.messages = data;
+  //   }, error =>{ console.log("Messages cannot be loaded.")});
+  // }
 
   public sendMessage(message: string): void {
     if (!message) {
@@ -141,10 +173,9 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
 
     if (action === Action.JOINED) {
       message = {
-        from: this.user,
-        action: action,
+        from: this.username,
         content: {
-          username: this.user.name,
+          username: this.user.username,
           previousUsername: params.previousUsername
         }
       };
