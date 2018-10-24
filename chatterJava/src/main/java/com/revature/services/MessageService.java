@@ -122,7 +122,7 @@ public class MessageService {
 	 * @param message
 	 * @return
 	 */
-	public MessageDto insertMessageDto(UserDto senderDto, UserDto receiverDto, String message) {
+	public static MessageDto insertMessageDto(UserDto senderDto, UserDto receiverDto, String message) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
@@ -196,7 +196,7 @@ public class MessageService {
 	 * value for a primary key
 	 * @param id
 	 */
-	public void deleteMessageDtoById(Integer id) {
+	public static void deleteMessageDtoById(Integer id) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
@@ -213,7 +213,7 @@ public class MessageService {
 	 * @param messageDto
 	 * @return
 	 */
-	public MessageDto updateMessageDto(MessageDto messageDto) {
+	public static MessageDto updateMessageDto(MessageDto messageDto) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
@@ -288,7 +288,7 @@ public class MessageService {
 	 * @param senderDto
 	 * @return
 	 */
-	public List<MessageDto> selectMessageDtoBySender(UserDto senderDto) {
+	public static List<MessageDto> selectMessageDtoBySender(UserDto senderDto) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
@@ -348,7 +348,7 @@ public class MessageService {
 	 * @param receiverDto
 	 * @return
 	 */
-	public List<MessageDto> selectMessageDtoByReceiver(UserDto receiverDto) {
+	public static List<MessageDto> selectMessageDtoByReceiver(UserDto receiverDto) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
@@ -409,7 +409,7 @@ public class MessageService {
 	 * @param receiverDto
 	 * @return
 	 */
-	public List<MessageDto> selectMessageDtoBySenderAndReceiver(UserDto senderDto, UserDto receiverDto) {
+	public static List<MessageDto> selectMessageDtoBySenderAndReceiver(UserDto senderDto, UserDto receiverDto) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
@@ -475,7 +475,7 @@ public class MessageService {
 	 * @param n
 	 * @return
 	 */
-	public List<MessageDto> selectNMostRecentBySenderAndReceiver(UserDto senderDto, UserDto receiverDto, Integer n) {
+	public static List<MessageDto> selectNMostRecentBySenderAndReceiver(UserDto senderDto, UserDto receiverDto, Integer n) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
@@ -540,7 +540,7 @@ public class MessageService {
 	 * @param userDto2
 	 * @return
 	 */
-	public List<MessageDto> selectMessageDtoByConversation(UserDto userDto1, UserDto userDto2) {
+	public static List<MessageDto> selectMessageDtoByConversation(UserDto userDto1, UserDto userDto2) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
@@ -607,7 +607,7 @@ public class MessageService {
 	 * @param n
 	 * @return
 	 */
-	public List<MessageDto> selectNMostRecentByConversation(UserDto userDto1, UserDto userDto2, Integer n) {
+	public static List<MessageDto> selectNMostRecentByConversation(UserDto userDto1, UserDto userDto2, Integer n) {
 		// create a new MessageDaoImpl
 		md = new MessageDaoImpl();
 		logger.info("MessageDaoImpl created");
