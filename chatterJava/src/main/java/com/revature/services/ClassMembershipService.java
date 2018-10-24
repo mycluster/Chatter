@@ -157,7 +157,7 @@ public class ClassMembershipService {
 	 * @param id
 	 */
 	public static void deleteClassMembershipById(Integer id) {
-		// create a new UserDaoImpl
+		// create a new ClassMembershipDaoImpl
 		cd = new ClassMembershipDaoImpl();
 		logger.info("ClassMembershipDaoImpl created");
 

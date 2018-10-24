@@ -167,7 +167,7 @@ public class NoteService {
 	 * @param id
 	 */
 	public static void deleteNoteDtoById(Integer id) {
-		// create a new UserDaoImpl
+		// create a new MessageDaoImpl
 		nd = new NoteDaoImpl();
 		logger.info("NoteDaoImpl created");
 

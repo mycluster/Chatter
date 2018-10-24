@@ -261,7 +261,7 @@ public class UserAccessService {
 	 * @param id
 	 */
 	public static void deleteUserAccess(Integer id) {
-		// create a new UserDaoImpl
+		// create a new UserAccessDaoImpl
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");
 

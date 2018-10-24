@@ -21,6 +21,8 @@ public class MessageDaoImpl implements MessageDao {
 	/**
 	 * Selects all records from the Message table and returns them as a list of
 	 * Message objects
+	 * 
+	 * @return
 	 */
 	@Override
 	public List<Message> selectAllMessage() {
@@ -375,11 +377,11 @@ public class MessageDaoImpl implements MessageDao {
 		logger.debug("Message: " + messages);
 		return messages;
 	}
-	
+
 	/**
-	 * Takes in two User objects and selects all records from the Message table where
-	 * one of the users is the sender and the other is the receiver. Returns the records as a list of Message
-	 * objects
+	 * Takes in two User objects and selects all records from the Message table
+	 * where one of the users is the sender and the other is the receiver. Returns
+	 * the records as a list of Message objects
 	 */
 	@Override
 	public List<Message> selectMessageByConversation(User user1, User user2) {
@@ -422,10 +424,11 @@ public class MessageDaoImpl implements MessageDao {
 		logger.debug("Message: " + messages);
 		return messages;
 	}
+
 	/**
-	 * Takes in two User objects and an Integer n and selects all records from the Message table where
-	 * one of the users is the sender and the other is the receiver. Returns only the n most recent records
-	 * as a list of Message objects
+	 * Takes in two User objects and an Integer n and selects all records from the
+	 * Message table where one of the users is the sender and the other is the
+	 * receiver. Returns only the n most recent records as a list of Message objects
 	 */
 	@Override
 	public List<Message> selectNMostRecentByConversation(User user1, User user2, Integer n) {
@@ -476,6 +479,34 @@ public class MessageDaoImpl implements MessageDao {
 		logger.info("Returning Message list");
 		logger.debug("Message: " + messages);
 		return messages;
+	}
+
+	@Override
+	public Message selectMessageById(Integer id) {
+		// create a new session
+		Session session = HibernateUtil.getSession();
+		// make a null reference to a Message object
+		Message message= null;
+		logger.info("Selecting Message by id via DAO");
+		logger.info("With id" + id);
+
+		try {
+			// attempt to get the Message
+			message = (Message) session.get(Message.class, id);
+			logger.info("Retrieved Message");
+		} catch (HibernateException e) {
+			// if a Hibernate Exception is triggered, catch
+			// it and log it
+			logger.error("HibernateException triggered", e);
+		} finally {
+			// clean up
+			session.close();
+			logger.info("Session closed");
+		}
+		logger.info("Returning Message");
+		logger.debug("Message: " + message.toString());
+		// return the Message
+		return message;
 	}
 
 }
