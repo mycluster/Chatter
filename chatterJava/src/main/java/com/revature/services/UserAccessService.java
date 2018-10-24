@@ -25,7 +25,7 @@ public class UserAccessService {
 	private static UserDao ud;
 	private static NoteDao nd;
 
-	public List<UserAccessDto> selectAllUserAccessDto() {
+	public static List<UserAccessDto> selectAllUserAccessDto() {
 		// create a new UserAccessDaoImpl
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");
@@ -77,7 +77,7 @@ public class UserAccessService {
 	 * @param id
 	 * @return
 	 */
-	public UserAccessDto selectUserAccessById(Integer id) {
+	public static UserAccessDto selectUserAccessById(Integer id) {
 		// create a new UserAccessDaoImpl
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");
@@ -117,7 +117,7 @@ public class UserAccessService {
 	 * @param userAccessDto
 	 * @return
 	 */
-	public UserAccessDto updateUserAccess(UserAccessDto userAccessDto) {
+	public static UserAccessDto updateUserAccess(UserAccessDto userAccessDto) {
 		// create a new UserAccessDao
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");
@@ -192,7 +192,7 @@ public class UserAccessService {
 	 * @param user
 	 * @return
 	 */
-	public UserAccessDto insertUserAccess(AccessLevel access, NoteDto noteDto, UserDto userDto) {
+	public static UserAccessDto insertUserAccess(AccessLevel access, NoteDto noteDto, UserDto userDto) {
 		// create a new UserAccessDao
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");
@@ -260,7 +260,7 @@ public class UserAccessService {
 	 * 
 	 * @param id
 	 */
-	public void deleteUserAccess(Integer id) {
+	public static void deleteUserAccess(Integer id) {
 		// create a new UserDaoImpl
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");
@@ -279,7 +279,7 @@ public class UserAccessService {
 	 * @param user
 	 * @return
 	 */
-	public List<UserAccessDto> getUserAccessByUser(UserDto userDto) {
+	public static List<UserAccessDto> getUserAccessByUser(UserDto userDto) {
 		// create a new UserAccessDaoImpl
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");
@@ -341,7 +341,7 @@ public class UserAccessService {
 	 * @param noteDto
 	 * @return
 	 */
-	public List<UserAccessDto> getUserAccessByNote(NoteDto noteDto) {
+	public static List<UserAccessDto> getUserAccessByNote(NoteDto noteDto) {
 		// create a new UserAccessDaoImpl
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");
@@ -402,7 +402,7 @@ public class UserAccessService {
 	 * @param access
 	 * @return
 	 */
-	public List<UserAccessDto> getUserAccessByUserAndAccess(UserDto userDto, AccessLevel access) {
+	public static List<UserAccessDto> getUserAccessByUserAndAccess(UserDto userDto, AccessLevel access) {
 		// create a new UserAccessDaoImpl
 		ad = new UserAccessDaoImpl();
 		logger.info("UserAccessDaoImpl created");

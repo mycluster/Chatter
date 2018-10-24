@@ -9,10 +9,10 @@ import com.revature.beans.User;
 public interface ClassMembershipDao {
 
 	public List<ClassMembership> selectAllClassMembership();
-	public ClassMembership selectClassMemebershipById(Integer id);
+	public ClassMembership selectClassMembershipById(Integer id);
 	public ClassMembership updateClassMembership(ClassMembership classMembership);
-	public void deleteClassMemebershipById(Integer id);
-	public Integer insertClassMemebership(ClassMembership classMembership);
+	public void deleteClassMembershipById(Integer id);
+	public Integer insertClassMembership(ClassMembership classMembership);
 	
 	// we want to be able to select class membership by a user
 	// and also by a class

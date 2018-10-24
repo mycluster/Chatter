@@ -54,7 +54,7 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 	 * primary key id as a ClassMembership
 	 */
 	@Override
-	public ClassMembership selectClassMemebershipById(Integer id) {
+	public ClassMembership selectClassMembershipById(Integer id) {
 		// create a new session
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a ClassMembership object
@@ -145,7 +145,7 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 	 * from the table
 	 */
 	@Override
-	public void deleteClassMemebershipById(Integer id) {
+	public void deleteClassMembershipById(Integer id) {
 		// create a new session
 		Session session = HibernateUtil.getSession();
 		// create a null Transaction reference
@@ -181,7 +181,7 @@ public class ClassMembershipDaoImpl implements ClassMembershipDao {
 	 * into the ClassMembership table. Returns the primary key of the newly inserted record
 	 */
 	@Override
-	public Integer insertClassMemebership(ClassMembership classMembership) {
+	public Integer insertClassMembership(ClassMembership classMembership) {
 		// create a new session
 		Session session = HibernateUtil.getSession();
 		// create a null reference to a transaction
