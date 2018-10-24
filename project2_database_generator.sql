@@ -76,11 +76,14 @@ CREATE TABLE notes (
     ty NUMBER(2),
     loc VARCHAR2(100),
     last_edited TIMESTAMP,
+    editing NUMBER(9),
     CONSTRAINT notes_pk PRIMARY KEY (n_id),
     CONSTRAINT notes_owner_fk FOREIGN KEY (ownr)
         REFERENCES usrs (u_id),
     CONSTRAINT notes_type_fk FOREIGN KEY (ty)
-        REFERENCES note_types (n_id)
+        REFERENCES note_types (n_id),
+    CONSTRAINT editing FOREIGN KEY (editing)
+        REFERENCES usrs (u_id)
 );
 
 CREATE TABLE class_categories (
@@ -188,3 +191,5 @@ CREATE TABLE class_accesses (
  INSERT INTO privs VALUES (1,'STANDARD');
  INSERT INTO privs VALUES (2,'MODERATOR');
  INSERT INTO privs VALUES (3,'ADMIN');
+ 
+ COMMIT;

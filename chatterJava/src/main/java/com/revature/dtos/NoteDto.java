@@ -11,28 +11,31 @@ public class NoteDto {
 	private UserDto owner;
 	private NoteType type;
 	private String name;
-	
+	private UserDto editor;
 	public NoteDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NoteDto(Integer id, Timestamp lastEdited, String location, UserDto owner, NoteType type, String name) {
+	public NoteDto(Integer id, Timestamp lastEdited, String location, UserDto owner, NoteType type, String name,
+			UserDto editor) {
 		this.id = id;
 		this.lastEdited = lastEdited;
 		this.location = location;
 		this.owner = owner;
 		this.type = type;
 		this.name = name;
+		this.editor = editor;
 	}
 	@Override
 	public String toString() {
 		return "NoteDto [id=" + id + ", lastEdited=" + lastEdited + ", location=" + location + ", owner=" + owner
-				+ ", type=" + type + ", name=" + name + "]";
+				+ ", type=" + type + ", name=" + name + ", editor=" + editor + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((editor == null) ? 0 : editor.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastEdited == null) ? 0 : lastEdited.hashCode());
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
@@ -50,6 +53,11 @@ public class NoteDto {
 		if (getClass() != obj.getClass())
 			return false;
 		NoteDto other = (NoteDto) obj;
+		if (editor == null) {
+			if (other.editor != null)
+				return false;
+		} else if (!editor.equals(other.editor))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -118,4 +126,13 @@ public class NoteDto {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public UserDto getEditor() {
+		return editor;
+	}
+	public void setEditor(UserDto editor) {
+		this.editor = editor;
+	}
+	
+	
+	
 }

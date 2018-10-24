@@ -50,9 +50,18 @@ public class NoteService {
 			logger.debug("User: " + n.getOwner());
 			logger.debug("UserDto: " + owner);
 
+			// create the UserDto to be used in the noteDto
+			UserDto editor = null;
+			if (n.getEditor() != null) {
+				editor = UserService.createUserDtoFromUser(n.getEditor());
+			}
+			logger.info("UserDto created from user");
+			logger.debug("User: " + n.getEditor());
+			logger.debug("UserDto: " + editor);
+
 			// create a new NoteDto
 			NoteDto noteDto = new NoteDto(n.getId(), n.getLastEdited(), n.getLocation(), owner, n.getType(),
-					n.getName());
+					n.getName(), editor);
 			logger.info("NoteDto created");
 			logger.debug("NoteDto: " + noteDto);
 
@@ -88,9 +97,18 @@ public class NoteService {
 		logger.debug("User: " + note.getOwner());
 		logger.debug("UserDto: " + owner);
 
+		// create the UserDto to be used in the noteDto
+		UserDto editor = null;
+		if (note.getEditor() != null) {
+			editor = UserService.createUserDtoFromUser(note.getEditor());
+		}
+		logger.info("UserDto created from user");
+		logger.debug("User: " + note.getEditor());
+		logger.debug("UserDto: " + editor);
+
 		// create the NoteDto
 		NoteDto noteDto = new NoteDto(note.getId(), note.getLastEdited(), note.getLocation(), owner, note.getType(),
-				note.getName());
+				note.getName(), editor);
 		logger.info("NoteDto created");
 		logger.debug("NoteDto: " + noteDto);
 		logger.info("Returning NoteDto");
@@ -111,8 +129,7 @@ public class NoteService {
 	 * @param name
 	 * @return
 	 */
-	public static NoteDto insertNoteDto(Timestamp lastEdited, String location, UserDto ownerDto, NoteType type,
-			String name) {
+	public static NoteDto insertNoteDto(String location, UserDto ownerDto, NoteType type, String name) {
 		// create a new NoteDaoImpl
 		nd = new NoteDaoImpl();
 		logger.info("NoteDaoImpl created");
@@ -129,7 +146,7 @@ public class NoteService {
 		// create a note to insert
 		// since we are inserting a new note the primary key does not matter
 		// we will input 0 as the default value
-		Note toInsert = new Note(0, owner, type, location, lastEdited, name);
+		Note toInsert = new Note(0, owner, type, location, name);
 		logger.info("Note to insert generated");
 		logger.debug("Note: " + toInsert.toString());
 
@@ -149,9 +166,18 @@ public class NoteService {
 		logger.debug("Owner: " + inserted.getOwner());
 		logger.debug("OwnerDto: " + insertedOwner);
 
+		// create the UserDto to be used in the noteDto
+		UserDto insertedEditor = null;
+		if (inserted.getEditor() != null) {
+			insertedEditor = UserService.createUserDtoFromUser(inserted.getEditor());
+		}
+		logger.info("UserDto created from user");
+		logger.debug("User: " + inserted.getEditor());
+		logger.debug("UserDto: " + insertedEditor);
+
 		// create a NoteDto to return
 		NoteDto note = new NoteDto(inserted.getId(), inserted.getLastEdited(), inserted.getLocation(), insertedOwner,
-				inserted.getType(), inserted.getName());
+				inserted.getType(), inserted.getName(), insertedEditor);
 		logger.info("NoteDto created");
 		logger.debug("NoteDto: " + note);
 
@@ -203,6 +229,14 @@ public class NoteService {
 		logger.info("User retrieved from database");
 		logger.debug("User: " + owner);
 
+		// if there is an editor select them from the database
+		User editor = null;
+		if (noteDto.getEditor() != null) {
+			editor = ud.selectUserById(noteDto.getEditor().getId());
+			logger.info("User retrieved from database");
+		}
+		logger.debug("User: " + editor);
+
 		// update the Note object to match the NoteDto
 		// we do not change the id because the
 		// id values must already be equal because of how
@@ -212,6 +246,7 @@ public class NoteService {
 		note.setName(noteDto.getName());
 		note.setType(noteDto.getType());
 		note.setOwner(owner);
+		note.setEditor(editor);
 		logger.info("Note object modified to match NoteDto");
 
 		// update the Note
@@ -224,9 +259,18 @@ public class NoteService {
 		logger.debug("Owner: " + updatedNote.getOwner());
 		logger.debug("OwnerDto: " + updatedOwner);
 
+		// create the UserDto to be used in the noteDto
+		UserDto updatedEditor = null;
+		if (note.getEditor() != null) {
+			updatedEditor = UserService.createUserDtoFromUser(note.getEditor());
+		}
+		logger.info("UserDto created from user");
+		logger.debug("User: " + note.getEditor());
+		logger.debug("UserDto: " + updatedEditor);
+
 		// create the new NoteDto to be returned
 		NoteDto updated = new NoteDto(updatedNote.getId(), updatedNote.getLastEdited(), updatedNote.getLocation(),
-				updatedOwner, updatedNote.getType(), updatedNote.getName());
+				updatedOwner, updatedNote.getType(), updatedNote.getName(), updatedEditor);
 		logger.info("NoteDto created");
 		logger.debug("Updated NoteDto: " + updated);
 
@@ -276,9 +320,18 @@ public class NoteService {
 			logger.debug("User: " + n.getOwner());
 			logger.debug("UserDto: " + ownerDto);
 
+			// create the UserDto to be used in the noteDto
+			UserDto editor = null;
+			if (n.getEditor() != null) {
+				editor = UserService.createUserDtoFromUser(n.getEditor());
+			}
+			logger.info("UserDto created from user");
+			logger.debug("User: " + n.getEditor());
+			logger.debug("UserDto: " + editor);
+
 			// create a new NoteDto
 			NoteDto noteDto = new NoteDto(n.getId(), n.getLastEdited(), n.getLocation(), ownerDto, n.getType(),
-					n.getName());
+					n.getName(), editor);
 			logger.info("NoteDto created");
 			logger.debug("NoteDto: " + noteDto);
 
@@ -290,10 +343,11 @@ public class NoteService {
 		logger.info("Returning list of NoteDtos");
 		return noteDtos;
 	}
-	
+
 	/**
-	 * Takes in a Note object and constructs a NoteDto from it. Returns that
-	 * NoteDto object
+	 * Takes in a Note object and constructs a NoteDto from it. Returns that NoteDto
+	 * object
+	 * 
 	 * @param note
 	 * @return
 	 */
@@ -308,9 +362,18 @@ public class NoteService {
 		logger.debug("User: " + note.getOwner());
 		logger.debug("UserDto: " + owner);
 
+		// create the UserDto to be used in the noteDto
+		UserDto editor = null;
+		if (note.getEditor() != null) {
+			editor = UserService.createUserDtoFromUser(note.getEditor());
+		}
+		logger.info("UserDto created from user");
+		logger.debug("User: " + note.getEditor());
+		logger.debug("UserDto: " + editor);
+
 		// create the NoteDto
 		NoteDto noteDto = new NoteDto(note.getId(), note.getLastEdited(), note.getLocation(), owner, note.getType(),
-				note.getName());
+				note.getName(), editor);
 		logger.info("NoteDto created");
 		logger.debug("NoteDto: " + noteDto);
 		logger.info("Returning NoteDto");
