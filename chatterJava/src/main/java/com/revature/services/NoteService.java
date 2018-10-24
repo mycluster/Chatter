@@ -234,10 +234,11 @@ public class NoteService {
 		logger.info("Returning updated NoteDto");
 		return updated;
 	}
-	
+
 	/**
-	 * Selects all records from the database with the specified owner and returns them as a List
-	 * of NoteDto objects
+	 * Selects all records from the database with the specified owner and returns
+	 * them as a List of NoteDto objects
+	 * 
 	 * @param owner
 	 * @return
 	 */
@@ -245,16 +246,16 @@ public class NoteService {
 		// create a new NoteDaoImpl
 		nd = new NoteDaoImpl();
 		logger.info("NoteDaoImpl created");
-		
+
 		// create a new UserDaoImpl
 		ud = new UserDaoImpl();
 		logger.info("UserDaoImpl created");
-		
+
 		// get the owner of the note as a User object
 		User ownr = ud.selectUserById(owner.getId());
 		logger.info("Owner retrieved from database");
 		logger.debug("Owner: " + ownr);
-		logger.debug("OwnerDto: "+ owner);
+		logger.debug("OwnerDto: " + owner);
 
 		// get all of the notes from the database
 		List<Note> notes = nd.selectAllNotesByOwner(ownr);
@@ -288,5 +289,32 @@ public class NoteService {
 		// return the list of NoteDtos
 		logger.info("Returning list of NoteDtos");
 		return noteDtos;
+	}
+	
+	/**
+	 * Takes in a Note object and constructs a NoteDto from it. Returns that
+	 * NoteDto object
+	 * @param note
+	 * @return
+	 */
+	public static NoteDto createNoteDtoFromNote(Note note) {
+		// create a new NoteDaoImpl
+		nd = new NoteDaoImpl();
+		logger.info("NoteDaoImpl created");
+
+		// create the UserDto for the note
+		UserDto owner = UserService.createUserDtoFromUser(note.getOwner());
+		logger.info("UserDto created from User");
+		logger.debug("User: " + note.getOwner());
+		logger.debug("UserDto: " + owner);
+
+		// create the NoteDto
+		NoteDto noteDto = new NoteDto(note.getId(), note.getLastEdited(), note.getLocation(), owner, note.getType(),
+				note.getName());
+		logger.info("NoteDto created");
+		logger.debug("NoteDto: " + noteDto);
+		logger.info("Returning NoteDto");
+		// return the NoteDto
+		return noteDto;
 	}
 }
