@@ -18,17 +18,17 @@ import com.revature.services.MessageService;
 import com.revature.services.UserService;
 
 /**
- * Servlet implementation class selectByConversation
+ * Servlet implementation class SelectNMostRecentByConversation
  */
-public class selectByConversation extends HttpServlet {
+public class SelectNMostRecentByConversation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final static Logger logger = Logger.getLogger(selectByConversation.class);
-
+	private final static Logger logger = Logger.getLogger(SelectNMostRecentByConversation.class);
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public selectByConversation() {
-    	super();
+    public SelectNMostRecentByConversation() {
+        super();
         logger.info("Servlet initializing");
     }
 
@@ -36,7 +36,7 @@ public class selectByConversation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("SelectByConversation doGet method starting");
+		logger.info("SelectNMostRecentByConversation doGet method starting");
 		// set the response content type
 		response.setContentType("application/json");
 		logger.info("Response content type set");
@@ -56,6 +56,11 @@ public class selectByConversation extends HttpServlet {
 		logger.info("Second username retreived from request");
 		logger.debug("Username2: "+ username2);
 		
+		// get the number of messages to retrieve
+		Integer numberOfMessages = Integer.parseInt(request.getParameter("n"));
+		logger.info("Number of messages retrieved from request");
+		logger.debug("Number: "+ numberOfMessages);
+		
 		// get the user with username1
 		UserDto user1 = UserService.getUserDtoByUsername(username1);
 		logger.info("User with username1 retrieved from database");
@@ -67,8 +72,8 @@ public class selectByConversation extends HttpServlet {
 		logger.debug("User: "+ user2.toString());
 	
 		// get the conversation messages from the database
-		List<MessageDto> conversation = MessageService.selectMessageDtoByConversation(user1, user2);
-		logger.info("Conversation messages retrieved from database");
+		List<MessageDto> conversation = MessageService.selectNMostRecentByConversation(user1, user2,numberOfMessages);
+		logger.info(numberOfMessages + " most recent conversation messages retrieved from database");
 		
 		// create a new ObjectMapper
 		ObjectMapper om = new ObjectMapper();

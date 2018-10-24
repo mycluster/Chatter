@@ -19,4 +19,14 @@
     <servlet-name>selectByConversation</servlet-name>
     <url-pattern>/selectByConversation</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectNMostRecentByConversation</display-name>
+    <servlet-name>SelectNMostRecentByConversation</servlet-name>
+    <servlet-class>com.revature.servlets.SelectNMostRecentByConversation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectNMostRecentByConversation</servlet-name>
+    <url-pattern>/SelectNMostRecentByConversation</url-pattern>
+  </servlet-mapping>
 </web-app>
