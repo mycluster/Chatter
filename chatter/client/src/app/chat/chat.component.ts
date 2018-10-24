@@ -8,12 +8,8 @@ import { SocketService } from './shared/services/socket.service';
 import { DialogUserComponent } from './dialog-user/dialog-user/dialog-user.component';
 import { DialogUserType } from './dialog-user/dialog-user/dialog-user-type';
 import { MessageService } from './shared/services/message.service';
+import { stringify } from '@angular/core/src/render3/util';
 
-
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { stringify } from '@angular/compiler/src/util';
-import { MessageInter } from './shared/model/message_interface';
-import { UserInter } from './shared/model/user_interface';
 
 const WSP = 'https://tools.ietf.org/html/rfc6455';
 
@@ -28,11 +24,19 @@ const WSP = 'https://tools.ietf.org/html/rfc6455';
 export class ChatterboxComponent implements OnInit, AfterViewInit {
   action = Action;
   username: string;
+  username2: string;
   user: User;
+  n: 30;
   messages: Message[] = [];
   newMessage = {
-    message: ""
+    id: "",
+    message: "",
+    sender: "",
+    receiver: "",
+    sentAt: "",
+    edited: "",
   }
+
   feedback: string ="";
   messageContent: string;
   ioConnection: any;
@@ -50,7 +54,7 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
   @ViewChildren(MatListItem, { read: ElementRef }) matListItems: QueryList<MatListItem>;
 
 
-  constructor(private socketService: SocketService, public dialog: MatDialog) { }
+  constructor(private socketService: SocketService, public dialog: MatDialog, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.initModel();
@@ -76,7 +80,7 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
   }
 
   private initModel(): void {
-    this.MessageService.selectAllMessages.subscribe(
+    this.messageService.selectNMostRecentByConversation(this.username, this.username2, this.n).subscribe(
       data =>{
         this.messages = data;
       },
@@ -88,7 +92,8 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
 
   insertMessage(){
     this.feedback = "";
-    this.MessageService.insertMessage(this.newMessage.message)
+    this.messageService.insertMessage(this.newMessage.id, this.newMessage.message, this.newMessage.sender,this.newMessage.receiver,
+      JSON.parse(this.newMessage.sentAt), JSON.parse(this.newMessage.edited)
     .subscribe(
       message => {
         this.feedback = message['message'];
@@ -97,14 +102,17 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
       error => {
         console.log(error.message);
       }
-    )
-  };
+    ));
+  }
+
   private initIoConnection(): void {
     this.socketService.initSocket();
 
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
         this.messages.push(message);
+        //call to service to retrieve other user's info
+        //set receiver in message 
       });
 
     this.socketService.onEvent(Event.CONNECT)
@@ -135,53 +143,46 @@ export class ChatterboxComponent implements OnInit, AfterViewInit {
       }
     
 
-      this.user.username = paramsDialog.username;
-      if (paramsDialog.dialogType === DialogUserType.NEW) {
-        this.initIoConnection();
-        this.sendNotification(paramsDialog, Action.JOINED);
-      }else if (paramsDialog.dialogType === DialogUserType.EDIT){
-        this.sendNotification(paramsDialog, Action.RENAME);
-      }
+      // this.user.username = paramsDialog.username;
+      // if (paramsDialog.dialogType === DialogUserType.NEW) {
+      //   this.initIoConnection();
+      //   this.sendNotification(paramsDialog, Action.JOINED);
+      // }else if (paramsDialog.dialogType === DialogUserType.EDIT){
+      //   this.sendNotification(paramsDialog, Action.EDIT);
+      // }
   
 
   });
 }
-  //Commented out in order to test base functionality first
-  // public selectNMostRecentByConversation(params): string {
-  // this.MessageService.selectNMostRecentByConversation()
-  //   .subscribe(
-  //     data => {
-  //       this.user = {username: data.username};
-  //       this.messages = data;
-  //   }, error =>{ console.log("Messages cannot be loaded.")});
-  // }
 
-  public sendMessage(message: string): void {
+  public sendMessage(message: Message): void {
     if (!message) {
       return;
     }
 
     this.socketService.send({
-      from: this.user,
-      content: message
+      id: message.id,
+      message: message.message,
+      sender: message.sender,
+      receiver: message.receiver,
+      sentAt: message.sentAt,
+      edited: message.edited 
+      
     });
     this.messageContent = null;
   }
 
-  public sendNotification(params: any, action: Action): void {
-    let message: Message;
 
-    if (action === Action.JOINED) {
-      message = {
-        from: this.username,
-        content: {
-          username: this.user.username,
-          previousUsername: params.previousUsername
-        }
-      };
-    }
+  // public sendNotification(params: any, action: Action, receiver: User): void {
 
-    this.socketService.send(message);
+  //   if (action === Action.NEWMESSAGE) {
+  //     action = {
+  //       action: action,
+  //     }
 
-  }
+  //   }
+
+  //   this.socketService.send(action);
+
+  // }
 }

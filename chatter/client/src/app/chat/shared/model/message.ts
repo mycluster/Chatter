@@ -8,7 +8,8 @@ export class Message{
   public id: number,
   public message: any,
   public sender: User,
-  public receiver: string,
-  public sentAt: Time
+  public receiver: User,
+  public sentAt: Date,
+  public edited: boolean
   ){}
 }
