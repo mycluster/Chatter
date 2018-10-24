@@ -1,84 +1,22 @@
-package com.revature.beans;
+package com.revature.dtos;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.revature.beans.Edit;
 
-@Entity
-@Table(name = "messages")
-public class Message {
 
-	@Id
-	@Column(name = "m_id")
-	@SequenceGenerator(sequenceName = "message_seq", name = "message_seq")
-	@GeneratedValue(generator = "message_seq", strategy = GenerationType.AUTO)
+public class MessageDto {
 	private Integer id;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "sender")
-	private User sender;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "receiver")
-	private User receiver;
-
-	@Column(name = "message")
+	private UserDto sender;
+	private UserDto receiver;
 	private String message;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "edited")
 	private Edit edited;
-
-	@Column(name = "sent_at", columnDefinition = "TIMESTAMP")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp sentAt;
-
-	// exciting method to make sure that the sent_at timestamp is accurate
-	// we went to be able to tell when a message is sent, so  we're going to 
-	// automatically generate the sentAt time when a message is created without a
-	// specified sentAt value
-	@PrePersist
-	protected void onCreate() {
-		// create a java calendar instance
-		Calendar calendar = Calendar.getInstance();
-
-		// get a java.util.Date from the calendar instance.
-		// this date will represent the current instant, or "now".
-		java.util.Date now = calendar.getTime();
-
-		// a java current time (now) instance
-		sentAt = new Timestamp(now.getTime());
-	}
-
-	public Message() {
+	public MessageDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Message(Integer id, User sender, User receiver, String message, Edit edited) {
-		this.id = id;
-		this.sender = sender;
-		this.receiver = receiver;
-		this.message = message;
-		this.edited = edited;
-		// auto generate the sentAt timestamp
-		this.onCreate();
-	}
-
-	public Message(Integer id, User sender, User receiver, String message, Edit edited, Timestamp sentAt) {
+	public MessageDto(Integer id, UserDto sender, UserDto receiver, String message, Edit edited, Timestamp sentAt) {
 		this.id = id;
 		this.sender = sender;
 		this.receiver = receiver;
@@ -86,13 +24,11 @@ public class Message {
 		this.edited = edited;
 		this.sentAt = sentAt;
 	}
-
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", sender=" + sender + ", receiver=" + receiver + ", message=" + message
+		return "MessageDto [id=" + id + ", sender=" + sender + ", receiver=" + receiver + ", message=" + message
 				+ ", edited=" + edited + ", sentAt=" + sentAt + "]";
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -105,7 +41,6 @@ public class Message {
 		result = prime * result + ((sentAt == null) ? 0 : sentAt.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -114,7 +49,7 @@ public class Message {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Message other = (Message) obj;
+		MessageDto other = (MessageDto) obj;
 		if (edited == null) {
 			if (other.edited != null)
 				return false;
@@ -147,53 +82,40 @@ public class Message {
 			return false;
 		return true;
 	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public User getSender() {
+	public UserDto getSender() {
 		return sender;
 	}
-
-	public void setSender(User sender) {
+	public void setSender(UserDto sender) {
 		this.sender = sender;
 	}
-
-	public User getReceiver() {
+	public UserDto getReceiver() {
 		return receiver;
 	}
-
-	public void setReceiver(User receiver) {
+	public void setReceiver(UserDto receiver) {
 		this.receiver = receiver;
 	}
-
 	public String getMessage() {
 		return message;
 	}
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 	public Edit getEdited() {
 		return edited;
 	}
-
 	public void setEdited(Edit edited) {
 		this.edited = edited;
 	}
-
 	public Timestamp getSentAt() {
 		return sentAt;
 	}
-
 	public void setSentAt(Timestamp sentAt) {
 		this.sentAt = sentAt;
 	}
-
 }

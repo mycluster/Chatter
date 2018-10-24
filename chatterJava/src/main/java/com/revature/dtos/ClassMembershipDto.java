@@ -1,49 +1,26 @@
-package com.revature.beans;
+package com.revature.dtos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import com.revature.beans.ClassRole;
+import com.revature.beans.Cls;
 
-@Entity
-@Table(name="class_membership")
-public class ClassMembership {
-	@Id
-	@Column(name="c_id")
-	@SequenceGenerator(sequenceName="class_membership_seq", name="class_membership_seq")
-	@GeneratedValue(generator="class_membership_seq", strategy=GenerationType.AUTO)
+public class ClassMembershipDto {
 	private Integer id;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="usr")
-	private User user;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="cls")
 	private Cls cls;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="c_role")
 	private ClassRole role;
-	public ClassMembership() {
+	private UserDto user;
+	public ClassMembershipDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ClassMembership(Integer id, User user, Cls cls, ClassRole role) {
+	public ClassMembershipDto(Integer id, Cls cls, ClassRole role, UserDto user) {
 		this.id = id;
-		this.user = user;
 		this.cls = cls;
 		this.role = role;
+		this.user = user;
 	}
 	@Override
 	public String toString() {
-		return "ClassMembership [id=" + id + ", user=" + user + ", cls=" + cls + ", role=" + role + "]";
+		return "ClassMembershipDto [id=" + id + ", cls=" + cls + ", role=" + role + ", user=" + user + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -63,7 +40,7 @@ public class ClassMembership {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ClassMembership other = (ClassMembership) obj;
+		ClassMembershipDto other = (ClassMembershipDto) obj;
 		if (cls == null) {
 			if (other.cls != null)
 				return false;
@@ -92,12 +69,6 @@ public class ClassMembership {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	public Cls getCls() {
 		return cls;
 	}
@@ -110,5 +81,10 @@ public class ClassMembership {
 	public void setRole(ClassRole role) {
 		this.role = role;
 	}
-	
+	public UserDto getUser() {
+		return user;
+	}
+	public void setUser(UserDto user) {
+		this.user = user;
+	}
 }

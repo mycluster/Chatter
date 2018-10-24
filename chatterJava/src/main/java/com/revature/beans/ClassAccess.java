@@ -23,7 +23,7 @@ public class ClassAccess {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="cls")
-	private Class cls;
+	private Cls cls;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="note")
@@ -36,7 +36,7 @@ public class ClassAccess {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ClassAccess(Integer id, Class cls, Note note, AccessLevel access) {
+	public ClassAccess(Integer id, Cls cls, Note note, AccessLevel access) {
 		this.id = id;
 		this.cls = cls;
 		this.note = note;
@@ -93,10 +93,10 @@ public class ClassAccess {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Class getCls() {
+	public Cls getCls() {
 		return cls;
 	}
-	public void setCls(Class cls) {
+	public void setCls(Cls cls) {
 		this.cls = cls;
 	}
 	public Note getNote() {
