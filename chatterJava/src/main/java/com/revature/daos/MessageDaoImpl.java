@@ -407,6 +407,11 @@ public class MessageDaoImpl implements MessageDao {
 					Restrictions.and(Restrictions.eq("sender", user1), Restrictions.eq("receiver", user2)),
 					Restrictions.and(Restrictions.eq("sender", user2), Restrictions.eq("receiver", user1))));
 			logger.info("Sender and Receiver restrictions added to the query");
+
+			// set the order by
+			crit.addOrder(Order.desc("sentAt"));
+			logger.info("Ordering set to desc based on sentAt");
+			
 			// attempt to execute the query
 			messages = crit.list();
 			logger.info("Messages retrieved");
@@ -486,7 +491,7 @@ public class MessageDaoImpl implements MessageDao {
 		// create a new session
 		Session session = HibernateUtil.getSession();
 		// make a null reference to a Message object
-		Message message= null;
+		Message message = null;
 		logger.info("Selecting Message by id via DAO");
 		logger.info("With id" + id);
 
