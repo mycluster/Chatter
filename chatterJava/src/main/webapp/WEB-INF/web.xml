@@ -9,6 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <description>Location to store uploaded file</description>
+    <param-name>file-upload</param-name>
+    <param-value>
+    
+         C:\Installed\apache-tomcat-8.5.34\webapps\data\
+      </param-value>
+  </context-param>
   <servlet>
     <description></description>
     <display-name>selectByConversation</display-name>
@@ -28,5 +36,15 @@
   <servlet-mapping>
     <servlet-name>SelectNMostRecentByConversation</servlet-name>
     <url-pattern>/SelectNMostRecentByConversation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Upload</display-name>
+    <servlet-name>Upload</servlet-name>
+    <servlet-class>com.revature.servlets.Upload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Upload</servlet-name>
+    <url-pattern>/Upload</url-pattern>
   </servlet-mapping>
 </web-app>
