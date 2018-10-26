@@ -13,9 +13,8 @@
     <description>Location to store uploaded file</description>
     <param-name>file-upload</param-name>
     <param-value>
-    
          C:\Installed\apache-tomcat-8.5.34\webapps\data\
-      </param-value>
+     	</param-value>
   </context-param>
   <servlet>
     <description></description>
@@ -46,5 +45,15 @@
   <servlet-mapping>
     <servlet-name>Upload</servlet-name>
     <url-pattern>/Upload</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoadNote</display-name>
+    <servlet-name>LoadNote</servlet-name>
+    <servlet-class>com.revature.servlets.LoadNote</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadNote</servlet-name>
+    <url-pattern>/LoadNote</url-pattern>
   </servlet-mapping>
 </web-app>

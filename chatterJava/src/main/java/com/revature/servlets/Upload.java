@@ -1,7 +1,10 @@
 package com.revature.servlets;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
@@ -81,15 +84,15 @@ public class Upload extends HttpServlet {
 		// create a HashMap to contain the form fields
 		HashMap<String, String> formFields = new HashMap<String, String>();
 		logger.info("FormFields HashMap created");
-		
+
 		// create a HashMap to contain the Files as FileItems
 		HashMap<String, FileItem> files = new HashMap<String, FileItem>();
 		logger.info("Files HashMap created");
-		
+
 		/*
-		 * We do this because we need the user's information to properly upload the
-		 * file but we do not know what order the List of FileItems will be returned in.
-		 * So we will iterate through the list and move the FileItems in their respective
+		 * We do this because we need the user's information to properly upload the file
+		 * but we do not know what order the List of FileItems will be returned in. So
+		 * we will iterate through the list and move the FileItems in their respective
 		 * HashMaps
 		 */
 		try {
@@ -107,90 +110,47 @@ public class Upload extends HttpServlet {
 					logger.info("FileItem is a FormField");
 					formFields.put(item.getFieldName(), item.getString());
 					logger.info("FormField entered into HashMap");
-					logger.debug("Key: "+ item.getFieldName());
+					logger.debug("Key: " + item.getFieldName());
 					logger.debug("Value: " + item.getString());
 				} else {
 					logger.info("FileItem is a File");
 					// add the file to the file HashMap
 					files.put(item.getFieldName(), item);
 					logger.info("File added to files HashMap");
-					logger.debug("Field Name of File: "+ item.getFieldName());
-					logger.debug("File name: "+ item.getName());
+					logger.debug("Field Name of File: " + item.getFieldName());
+					logger.debug("File name: " + item.getName());
 				}
 
 			}
-			
+
 			// Get the username of the user uploading the file
 			String username = "";
-			//TODO GET THE USERNAME
+			// TODO GET THE USERNAME
 			logger.info("Username retrieved from request");
-			logger.debug("Username: "+ username);
-			
-			//get the user associated with the username
+			logger.debug("Username: " + username);
+
+			// get the user associated with the username
 			UserDto user = UserService.getUserDtoByUsername(username);
 			logger.info("User retrieved from database");
-			logger.debug("User: "+ user);
-			
+			logger.debug("User: " + user);
+
 			// upload the associated files one by one
 			logger.info("Iterating through the key set of the files hashMap");
-			for(String fileField : files.keySet()) {
+			for (String fileField : files.keySet()) {
 				// Get the FileItem relating to that key
 				FileItem fileItem = files.get(fileField);
 				logger.info("FileItem retrieve from HashMap");
-				logger.debug("Key: "+ fileField);
-				logger.debug("FileItem: "+ fileItem.getName());
-				
-				// Get the name of the File
-				String fileName = fileItem.getName();
-				logger.info("Name of file stored");
-				
-				// Create a null reference to a String
-				String fileLocation = null;
-				logger.info("Location string generated");
-				
-				// create the location of the file
-				logger.info("Creating path to file");
-				file = new File(filePath + "uId" + user.getId() + fileName.substring(fileName.lastIndexOf("\\") + 1));
-				fileLocation = filePath + "uId" + user.getId() + fileName.substring(fileName.lastIndexOf("\\"));
-				logger.info("Path to file created");
-				logger.debug("File path: "+ fileLocation);
-				
-				// write the actual file
-				logger.info("Writing file");
-				fileItem.write(file);
-				logger.info("File written");
-				
-				// get the type of the file
-				String typeString = "";
-				// TODO GET THE TYPE STRING FROM THE REQUEST
-				logger.info("Type string recieved from request");
-				logger.debug("Type string: "+ typeString);
-				
-				// get the note name
-				String name = "";
-				//TODO GET THE NOTE NAME FROM THE REQUEST
-				logger.info("Note name received from request");
-				logger.debug("Note name: "+ name);
-				
-				// convert the string into an integer
-				Integer id = Integer.parseInt(typeString);
-				logger.info("Type string converted into integer id");
-				logger.debug("Id: "+ id);
-				
-				// create a reference to a NoteTypeDao
-				NoteTypeDao ntd = new NoteTypeDaoImpl();
-				logger.info("NoteTypeDao created");
-				
-				// get the respective note type from the database
-				NoteType type = ntd.selectNoteTypeById(id);
-				logger.info("NoteType retrieved from database");
-				logger.debug("NoteType: "+type.toString());
-				
-				// insert the new note into the database
-				NoteService.insertNoteDto(fileLocation, user, type, name);
-				logger.info("Note successfully inserted");
-				
+				logger.debug("Key: " + fileField);
+				logger.debug("FileItem: " + fileItem.getName());
+
+				// call the upload file method
+				logger.info("Upload file method called");
+				uploadFile(fileItem, user);
+				logger.info("Upload file method completed");
+
 			}
+			// TODO TO UPLOAD A NOTE TEXT CALL UPLOAD NOTE STRING
+
 		} catch (FileUploadException e) {
 			logger.error("File upload failed", e);
 
@@ -199,6 +159,123 @@ public class Upload extends HttpServlet {
 		} catch (Exception e) {
 			logger.error("Something unknown went wrong", e);
 		}
+	}
+
+	/**
+	 * Takes in a String that represents a note, a UserDto, and a name for the note
+	 * and stores that note in a text file for later parsing. Inserts a Note
+	 * corresponding to that file into the database with the input user as the owner
+	 * 
+	 * @param note
+	 * @param user
+	 * @param noteName
+	 * @throws IOException
+	 */
+	private void uploadNoteString(String note, UserDto user, String noteName) throws IOException {
+		// create a null reference to an object output stream
+		ObjectOutputStream oos = null;
+		logger.info("ObjectOutputStream created");
+		
+		// create the file locatio
+		String fileLocation = filePath + "uId" + user.getId() + noteName + ".txt";
+		logger.info("File location created");
+		logger.debug("Location: "+ fileLocation);
+		
+		// create a reference to a NoteTypeDao
+		NoteTypeDao ntd = new NoteTypeDaoImpl();
+		logger.info("NoteTypeDao created");
+		
+		// get the respective note type from the database
+		NoteType type = ntd.selectNoteTypeById(1);
+		logger.info("NoteType retrieved from database");
+		logger.debug("NoteType: " + type.toString());
+		
+		try {
+			// get an ObjectOutputStream to the desired location
+			oos = new ObjectOutputStream(new FileOutputStream(fileLocation));
+			logger.info("ObjectOutpuStream to location created");
+			
+			// write the object
+			oos.writeObject(note);
+			logger.info("Note written");
+			// clean up post writing
+
+			// insert the new note into the database
+			NoteService.insertNoteDto(fileLocation, user, type, noteName);
+			logger.info("Note successfully inserted");
+		} catch (FileNotFoundException e) {
+			logger.error("File note found", e);
+		} catch (IOException e) {
+			logger.error("IO exception", e);
+		} finally {
+			// close the oos stream
+			logger.info("Closing ObjectOutputStream");
+			if (oos != null) {
+				oos.flush();
+				oos.close();
+			}
+			logger.info("Stream Closed");
+		}
+	}
+
+	/**
+	 * Takes in a FileItem and a User and uploads a file to the pre-defined uploads
+	 * folder and inserts a new note associated with the file into the database
+	 * 
+	 * @param fileItem
+	 * @param user
+	 * @throws Exception
+	 */
+	private void uploadFile(FileItem fileItem, UserDto user) throws Exception {
+		// Get the name of the File
+		String fileName = fileItem.getName();
+		logger.info("Name of file stored");
+
+		// Create a null reference to a String
+		String fileLocation = null;
+		logger.info("Location string generated");
+
+		// create the location of the file
+		logger.info("Creating path to file");
+		file = new File(filePath + "uId" + user.getId() + fileName.substring(fileName.lastIndexOf("\\") + 1));
+		fileLocation = filePath + "uId" + user.getId() + fileName.substring(fileName.lastIndexOf("\\"));
+		logger.info("Path to file created");
+		logger.debug("File path: " + fileLocation);
+
+		// write the actual file
+		logger.info("Writing file");
+		fileItem.write(file);
+		logger.info("File written");
+
+		// get the type of the file
+		String typeString = "";
+		// TODO GET THE TYPE STRING FROM THE REQUEST
+		logger.info("Type string recieved from request");
+		logger.debug("Type string: " + typeString);
+
+		// get the note name
+		String name = "";
+		// TODO GET THE NOTE NAME FROM THE REQUEST
+		logger.info("Note name received from request");
+		logger.debug("Note name: " + name);
+
+		// convert the string into an integer
+		Integer id = Integer.parseInt(typeString);
+		logger.info("Type string converted into integer id");
+		logger.debug("Id: " + id);
+
+		// create a reference to a NoteTypeDao
+		NoteTypeDao ntd = new NoteTypeDaoImpl();
+		logger.info("NoteTypeDao created");
+
+		// get the respective note type from the database
+		NoteType type = ntd.selectNoteTypeById(id);
+		logger.info("NoteType retrieved from database");
+		logger.debug("NoteType: " + type.toString());
+
+		// insert the new note into the database
+		NoteService.insertNoteDto(fileLocation, user, type, name);
+		logger.info("Note successfully inserted");
 	}
 
 	/**
