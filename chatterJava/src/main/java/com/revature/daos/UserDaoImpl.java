@@ -320,6 +320,7 @@ public class UserDaoImpl implements UserDao {
 			u.setPassword(user.getPassword());
 			u.setPriv(user.getPriv());
 			u.setUsername(user.getUsername());
+			u.setEmail(user.getEmail());
 			logger.info("User from database updated");
 
 			// save the changes
