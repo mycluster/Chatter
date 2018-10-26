@@ -40,13 +40,16 @@ public class User {
 	@JoinColumn(name="activated")
 	private Activation activation;
 
+	@Column(name="email")
+	private String email;
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public User(Integer id, String username, String password, String fName, String lName, Priv priv,
-			Activation activation) {
+			Activation activation, String email) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -54,12 +57,13 @@ public class User {
 		this.lName = lName;
 		this.priv = priv;
 		this.activation = activation;
+		this.email = email;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", fName=" + fName + ", lName="
-				+ lName + ", priv=" + priv + ", activation=" + activation + "]";
+				+ lName + ", priv=" + priv + ", activation=" + activation + ", email=" + email + "]";
 	}
 
 	@Override
@@ -67,6 +71,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((activation == null) ? 0 : activation.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lName == null) ? 0 : lName.hashCode());
@@ -89,6 +94,11 @@ public class User {
 			if (other.activation != null)
 				return false;
 		} else if (!activation.equals(other.activation))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
 			return false;
 		if (fName == null) {
 			if (other.fName != null)
@@ -178,5 +188,14 @@ public class User {
 	public void setActivation(Activation activation) {
 		this.activation = activation;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	
 }

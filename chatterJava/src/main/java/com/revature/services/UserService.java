@@ -73,7 +73,7 @@ public class UserService {
 
 		// create the UserDto
 		UserDto usr = new UserDto(user.getId(), user.getUsername(), user.getfName(), user.getlName(), user.getPriv(),
-				user.getActivation());
+				user.getActivation(), user.getEmail());
 		logger.info("UserDto created");
 		logger.debug("UserDto: " + usr);
 
@@ -109,6 +109,7 @@ public class UserService {
 		usr.setActivation(user.getActivation());
 		usr.setfName(user.getfName());
 		usr.setlName(user.getlName());
+		usr.setEmail(user.getEmail());
 		logger.info("User object modified to match UserDto");
 
 		// update the User
@@ -117,7 +118,7 @@ public class UserService {
 
 		// create the new UserDto to be returned
 		UserDto updated = new UserDto(updatedUsr.getId(), updatedUsr.getUsername(), updatedUsr.getfName(),
-				updatedUsr.getlName(), updatedUsr.getPriv(), updatedUsr.getActivation());
+				updatedUsr.getlName(), updatedUsr.getPriv(), updatedUsr.getActivation(), updatedUsr.getEmail());
 		logger.info("UserDto created");
 		logger.debug("Updated UserDto: " + updated);
 
@@ -138,7 +139,7 @@ public class UserService {
 	 * @param password
 	 * @return The UserDto created from the record of the freshly inserted User
 	 */
-	public static UserDto insertNewUserDto(String username, String fName, String lName, String password, Priv priv) {
+	public static UserDto insertNewUserDto(String username, String fName, String lName, String password, Priv priv, String email) {
 		// create a new UserDaoImpl
 		ud = new UserDaoImpl();
 		logger.info("UserDaoImpl created");
@@ -156,7 +157,7 @@ public class UserService {
 		// create a user to insert
 		// since we are inserting a new user the primary key does not matter
 		// we will input 0 as the default value
-		User toInsert = new User(0, username, fName, lName, password, priv, activation);
+		User toInsert = new User(0, username, fName, lName, password, priv, activation,email);
 		logger.info("User to insert generated");
 		logger.debug("User: " + toInsert.toString());
 
@@ -172,7 +173,7 @@ public class UserService {
 
 		// create a UserDto to return
 		UserDto user = new UserDto(inserted.getId(), inserted.getUsername(), inserted.getfName(), inserted.getlName(),
-				inserted.getPriv(), inserted.getActivation());
+				inserted.getPriv(), inserted.getActivation(),inserted.getEmail());
 		logger.info("UserDto created");
 		logger.debug("UserDto: " + user);
 
@@ -222,7 +223,7 @@ public class UserService {
 
 			// create a new UserDto to add to the list
 			UserDto userDto = new UserDto(u.getId(), u.getUsername(), u.getfName(), u.getlName(), u.getPriv(),
-					u.getActivation());
+					u.getActivation(),u.getEmail());
 			logger.info("UserDto created");
 			logger.debug("UserDto: " + userDto);
 
@@ -248,7 +249,7 @@ public class UserService {
 
 		// create the UserDto
 		UserDto usr = new UserDto(user.getId(), user.getUsername(), user.getfName(), user.getlName(), user.getPriv(),
-				user.getActivation());
+				user.getActivation(),user.getEmail());
 		logger.info("UserDto created");
 		logger.debug("UserDto: " + usr);
 		logger.info("Returning UserDto");
@@ -274,7 +275,7 @@ public class UserService {
 		logger.debug("User: " + user);
 		// create the UserDto
 		UserDto usr = new UserDto(user.getId(), user.getUsername(), user.getfName(), user.getlName(), user.getPriv(),
-				user.getActivation());
+				user.getActivation(),user.getEmail());
 		logger.info("UserDto created");
 		logger.debug("UserDto: " + usr);
 		logger.info("Returning UserDto");
@@ -304,7 +305,7 @@ public class UserService {
 
 		// create the new UserDto to be returned
 		UserDto updated = new UserDto(updatedUsr.getId(), updatedUsr.getUsername(), updatedUsr.getfName(),
-				updatedUsr.getlName(), updatedUsr.getPriv(), updatedUsr.getActivation());
+				updatedUsr.getlName(), updatedUsr.getPriv(), updatedUsr.getActivation(),updatedUsr.getEmail());
 		logger.info("UserDto created");
 		logger.debug("Updated UserDto: " + updated);
 

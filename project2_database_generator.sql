@@ -33,6 +33,7 @@ CREATE TABLE usrs (
     l_name VARCHAR2(30),
     priv NUMBER(2),
     activated NUMBER(1),
+    email VARCHAR2(100),
     CONSTRAINT usrs_pk PRIMARY KEY (u_id),
     CONSTRAINT usrs_fk FOREIGN KEY (priv)
         REFERENCES privs (p_id),
@@ -191,5 +192,20 @@ CREATE TABLE class_accesses (
  INSERT INTO privs VALUES (1,'STANDARD');
  INSERT INTO privs VALUES (2,'MODERATOR');
  INSERT INTO privs VALUES (3,'ADMIN');
+ 
+ -- STARTING USERS --
+ INSERT INTO usrs VALUES (1,'standard_test','testpass','test','test',1,2,'test@test.com');
+ INSERT INTO usrs VALUES (2,'chatter_test','testpass','chatter','the bird',3,2,'chatter@chatterbox.squawk');
+ 
+ -- STARTING NOTES --
+ INSERT INTO notes VALUES (1,1,'first note',1,'',SYSDATE,NULL);
+ INSERT INTO notes VALUES (2,2,'SQUAWK',1,'',SYSDATE,NULL);
+ 
+ -- STARTING MESSAGES --
+ INSERT INTO messages VALUES (1,2,1,'squaaaaaaawk',1,SYSDATE);
+ INSERT INTO messages VALUES (2,2,1,'chatter,chatter',2,SYSDATE);
+ 
+ 
+ 
  
  COMMIT;
