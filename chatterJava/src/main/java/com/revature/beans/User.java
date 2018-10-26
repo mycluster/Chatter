@@ -178,6 +178,5 @@ public class User {
 	public void setActivation(Activation activation) {
 		this.activation = activation;
 	}
-
 	
 }

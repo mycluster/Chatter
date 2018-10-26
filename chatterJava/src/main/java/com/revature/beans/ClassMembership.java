@@ -26,7 +26,7 @@ public class ClassMembership {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="cls")
-	private Class cls;
+	private Cls cls;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="c_role")
@@ -35,7 +35,7 @@ public class ClassMembership {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ClassMembership(Integer id, User user, Class cls, ClassRole role) {
+	public ClassMembership(Integer id, User user, Cls cls, ClassRole role) {
 		this.id = id;
 		this.user = user;
 		this.cls = cls;
@@ -98,10 +98,10 @@ public class ClassMembership {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Class getCls() {
+	public Cls getCls() {
 		return cls;
 	}
-	public void setCls(Class cls) {
+	public void setCls(Cls cls) {
 		this.cls = cls;
 	}
 	public ClassRole getRole() {
