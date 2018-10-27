@@ -20,6 +20,7 @@ const WSP = 'https://tools.ietf.org/html/rfc6455';
 export class ChatComponent implements OnInit {
   action = Action;
   user: User;
+  sentAt= this.sentAt;
   // id = this.user.id;
   // username = this.user.username;
   // fName = this.user.fName;
@@ -66,10 +67,10 @@ export class ChatComponent implements OnInit {
 
   private initModel(): void {
     this.user = {
-      id: this.id,
-      username: this.username,
-      fName: this.fName,
-      lName: this.lName
+      id: this.user.id,
+      username: this.user.username,
+      fName: this.user.fName,
+      lName: this.user.lName
     }
      
   }
@@ -109,15 +110,14 @@ export class ChatComponent implements OnInit {
       if (!paramsDialog) {
         return;
       }
-    
 
-      // this.user.username = paramsDialog.username;
-      // if (paramsDialog.dialogType === DialogUserType.NEW) {
-      //   this.initIoConnection();
-      //   this.sendNotification(paramsDialog, Action.JOINED);
-      // }else if (paramsDialog.dialogType === DialogUserType.EDIT){
-      //   this.sendNotification(paramsDialog, Action.EDIT);
-      // }
+      this.user.username = paramsDialog.username;
+      if (paramsDialog.dialogType === DialogUserType.NEW) {
+        this.initIoConnection();
+        this.sendNotification(paramsDialog, Action.JOINED);
+      }else if (paramsDialog.dialogType === DialogUserType.EDIT){
+        this.sendNotification(paramsDialog, Action.EDIT);
+      }
   
 
   });
@@ -141,16 +141,23 @@ export class ChatComponent implements OnInit {
   }
 
 
-  // public sendNotification(params: any, action: Action, receiver: User): void {
+  public sendNotification(params: any, action: Action): void {
+    
+    let message: Message;
 
-  //   if (action === Action.NEWMESSAGE) {
-  //     action = {
-  //       action: action,
-  //     }
+    if (action === Action.JOINED) {
+      message = {
+        id: message.id,
+        message: this.messages,
+        sender: this.user,
+        receiver: this.user,
+        sentAt: message.sentAt,
+        edited: message.edited
+      }
+    
+    }
 
-  //   }
+    this.socketService.send(this.sentAt);
 
-  //   this.socketService.send(action);
-
-  // }
+  }
 }

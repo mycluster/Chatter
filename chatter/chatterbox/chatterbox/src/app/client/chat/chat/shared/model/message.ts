@@ -1,14 +1,16 @@
 import { User } from './user';
-import { Timestamp } from 'rxjs';
-import { Time } from '@angular/common';
+import { Date } from 'rxjs';
+//import { Date } from '@angular/common';
+import { Action } from './action';
 
-export class Message{
-  constructor(
-  public id: number,
-  public message: any,
-  public sender: User,
-  public receiver: User,
-  public sentAt: Date,
-  public edited: boolean
-  ){}
+export interface Message{
+  
+  id: number;
+  message: any;
+  sender: User;
+  receiver: User,
+  sentAt: Date,
+  edited: boolean,
+  action?: Action,
+
 }
