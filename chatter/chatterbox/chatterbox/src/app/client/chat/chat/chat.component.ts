@@ -44,7 +44,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.initModel();
-    // Using timeout due to https://github.com/angular/angular/issues/14748
     setTimeout(() => {
       this.openUserPopup(this.defaultDialogUserParams);
     }, 0);
