@@ -6,10 +6,8 @@ import { MatDialogModule, MatIconModule, MatFormField, MatDialog, MatButtonModul
   imports: [
     CommonModule,
     MatButtonModule,
-    MatDialog,
     MatDialogModule,
     MatIconModule,
-    MatFormField,
     MatInputModule,
     MatListModule,
     MatSidenavModule,
@@ -29,7 +27,7 @@ import { MatDialogModule, MatIconModule, MatFormField, MatDialog, MatButtonModul
   declarations: [],
 
   providers: [
-    MatDialog
+    
   ]
 })
 export class MaterialModule { }
