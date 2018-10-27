@@ -1,31 +1,48 @@
 [mat-fab] {
     position: absolute;
-    right: 5%;
-    top: 45px;
+    right: 2%;
+    top: 35px;
     z-index: 1;
 }
 
-.chat-container {
+.chatterbox-container {
     position: fixed;
-    width: 80%;
-    height: 80%;
-    background-color: aqua;
+    width: 50%;
+    height: 60%;
+    background-color: FCFCFC; 
+    padding-left: 22%;
+    padding-top: 5%;
+    padding-bottom: 10%;
+    border: 2px;
+
 
 }
 
-.chat-input {
-    padding-top: 15px;
+.chatterbox-input {
+    padding-top: 10px;
     width: 80%;
+    padding-left: 6%;
+    margin-top: 5px;
+    margin-left: 10px;
+    text-align: center;
+    size: 40px;
 
 }
 
-.chat-list {
+
+.chirp {
+    font-size: 18px;
+    font-style: italic;
+    margin-left: 2em;
+}
+
+.chatterbox-list {
     overflow: auto;
     position: fixed;
-    top: 80px;
-    left: 20px;
-    right: 20px;
-    bottom: 100px;
+    top: 90px;
+    left: 25px;
+    right: 25px;
+    bottom: 120px;
 }
 
 .chat-list-item {
@@ -39,9 +56,13 @@
     height: 100%;
 }
 
-.chat-footer-container {
+.chatterbox-footer-container {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
+    bottom: 25px;
+    left: 25px;
+    right: 25px;
+}
+
+.chatter-notification {
+    text-align: center;
 }

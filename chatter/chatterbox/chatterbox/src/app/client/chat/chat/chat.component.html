@@ -4,7 +4,7 @@
   
   <div class="chatterbox-container">
     <mat-card class="main-card">
-      <mat-list class="chat-list">
+      <mat-list class="chatterbox-list">
         <mat-list-item *ngFor="let message of messages" [ngClass]="[(message.action === undefined && message.sender.id === user.id)? 'chatterbox-list-item': '']">
           <h4 mat-line *ngIf="message.action === undefined">
             <b>{{message.sender.username}}</b>
@@ -18,15 +18,14 @@
           <p mat-line *ngIf="message.action ===action.SWITCHCONVO" class="chatterbox-notify">
             <span> <b>{{message.content.sender}}</b></span>
           </p>
-  
-  
         </mat-list-item>
       </mat-list>
+
       <div class="chatterbox-footer-container">
-        <mat-icon>Chirp</mat-icon>
-        <mat-form-field class="chatter-input">
+        <mat-icon><p class="chirp">Chirp!</p></mat-icon>
+        <mat-form-field class="chatterbox-input">
           <input matInput #inputMessage maxlength="360" placeholder="Begin chattering..." [(ngModel)]="messageContent" (keyup.enter)="sendMessage(messageContent)">
-          <mat-hint align="end">{{inputMessage.value.length}}//360</mat-hint>
+          <mat-hint align="end">{{inputMessage.value.length}}/360</mat-hint>
         </mat-form-field>
       </div>
     </mat-card>
