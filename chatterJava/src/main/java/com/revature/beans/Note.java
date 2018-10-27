@@ -39,7 +39,6 @@ public class Note {
 	private String location;
 
 	@Column(name = "last_edited", columnDefinition = "TIMESTAMP")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp lastEdited;
 	
 	@Column(name="n_name")

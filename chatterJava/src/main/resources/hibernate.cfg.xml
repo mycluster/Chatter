@@ -22,11 +22,11 @@
 		
 		<property name="hibernate.connection.username">
 			<!-- This is my (Katelyn's) local database login info, to be deleted when we get access to an aws database -->
-			project2
+			system
 		</property>
 		
 		<property name="hibernate.connection.password">
-			chatter
+			admin
 		</property>
 		
 		<!-- This determines how many connections a single user can have to the database at a given moment.
@@ -58,6 +58,9 @@
 		<mapping class="com.revature.beans.Cls"/>
 		<mapping class="com.revature.beans.ClassAccess"/>
 		<mapping class="com.revature.beans.ClassMembership"/>
+		<mapping class="com.revature.beans.ClassCategory"/>
+		<mapping class="com.revature.beans.Edit"/>
+		<mapping class="com.revature.beans.Message"/>
 		<mapping class="com.revature.beans.ClassRole"/>
 		<mapping class="com.revature.beans.Note"/>
 		<mapping class="com.revature.beans.NoteType"/>

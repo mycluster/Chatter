@@ -204,7 +204,11 @@ CREATE TABLE class_accesses (
  INSERT INTO messages VALUES (1,2,1,'squaaaaaaawk',1,SYSDATE);
  INSERT INTO messages VALUES (2,2,1,'chatter,chatter',2,SYSDATE);
  
- 
- 
+--STARTING CLASSES --
+ INSERT INTO classes VALUES (1,'ENG101',1);
+INSERT INTO classes VALUES (2,'ALG1200',2);
+INSERT INTO classes VALUES (3,'CS2048',3);
+INSERT INTO classes VALUES (4,'BW101',4);
+INSERT INTO classes VALUES (5,'BW401',5);
  
  COMMIT;

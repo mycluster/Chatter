@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+ 
+<suite name="Suite1" verbose="1" >
+  <test name="Smoke"   >
+    <classes>
+    	<class name ="com.revature.tests.AccessLevelTest"/>
+    	<class name ="com.revature.tests.ActivationTest"/>
+    	<class name ="com.revature.tests.ClassCategoryTest"/>
+    	<class name ="com.revature.tests.ClassRoleTest"/>
+    	<class name ="com.revature.tests.ClassTest"/>
+    	<class name ="com.revature.tests.EditTest"/>
+    	<class name ="com.revature.tests.MessageTest"/>
+    	<class name ="com.revature.tests.NoteTest"/>
+    	<class name ="com.revature.tests.NoteTypeTest"/>
+    	<class name ="com.revature.tests.PrivTest"/>
+    	<class name ="com.revature.tests.UserTest"/>
+    	
+    </classes>
+ </test>
+</suite>
