@@ -16,8 +16,8 @@ export class User_Classes_Service {
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
     body = body.set('subject', selectedVal);
-    
-   return this.http.post(`http://localhost:8089/xhr_post/UserClasses`, body, {headers: headers});
+
+   return this.http.post(`http://18.223.100.121:8085/UserClasses`, body, {headers: headers});
   }
 
 }

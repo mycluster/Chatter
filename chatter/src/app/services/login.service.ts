@@ -13,10 +13,10 @@ export class LoginService {
   login(credentials: LoginModel){
     let body = new HttpParams();
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    
+
     body = body.set('username', credentials.username);
     body = body.set('password', credentials.password);
 
-    return this.http.post<Check_Pass[]>(`http://localhost:8089/chatterJava/Login`,body,{headers:headers});
+    return this.http.post<Check_Pass[]>(`http://18.223.100.121:8085/chatterJava/Login`,body,{headers:headers});
   }
 };
