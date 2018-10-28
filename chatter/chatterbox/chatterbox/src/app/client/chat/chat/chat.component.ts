@@ -89,15 +89,15 @@ export class ChatComponent implements OnInit {
       });
   }
 
-  public onClickUserInfo() {
-    this.openUserPopup({
-      data: {
-        username: this.user.name,
-        title: 'Edit details',
-        dialogType: DialogUserType.EDIT
-      }
-    });
-  }
+  // public onClickUserInfo() {
+  //   this.openUserPopup({
+  //     data: {
+  //       username: this.user.name,
+  //       title: 'Edit details',
+  //       dialogType: DialogUserType.EDIT
+  //     }
+  //   });
+  // }
 
   private getRandomId(): number {
     return Math.floor(Math.random()* (999999)) + 1;

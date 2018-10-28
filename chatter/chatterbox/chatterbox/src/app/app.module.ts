@@ -8,7 +8,7 @@ import { SharedModule } from './client/shared/shared.module';
 import { ChatModule } from '../app/client/chat/chat/chat.module';
 //import { FormsModule } from '@angular/forms';
 //import { MaterialModule } from './client/shared/material/material.module';
-
+import { CommonModule } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { ChatModule } from '../app/client/chat/chat/chat.module';
     AppRoutingModule,
     SharedModule,
     ChatModule,
+    CommonModule
     //FormsModule,
     //MaterialModule
     

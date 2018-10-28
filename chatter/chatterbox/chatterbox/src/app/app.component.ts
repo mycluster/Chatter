@@ -6,11 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    fullImagePath: string;
+    //fullImagePath: string;
 
-    constructor(){
-      this.fullImagePath = 'C:\Users\Associate\Documents\Jedi_Training\Building\Chatter\chatter\chatterbox\chatterbox\src\assets\chatter.png'
-    }
+    // constructor(){
+    //   this.fullImagePath = 'C:\Users\Associate\Documents\Jedi_Training\Building\Chatter\chatter\chatterbox\chatterbox\src\assets\chatter.png'
+    // }
   ngOnInit(): void {
   }
 
