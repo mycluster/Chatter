@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="classform">
+  <div class="classform" *ngIf="!submitted">
     <h1>Create a Class</h1>
 
     <form  (ngSubmit)="onSubmit()">
