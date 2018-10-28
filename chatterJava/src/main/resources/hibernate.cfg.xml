@@ -21,7 +21,7 @@
 		</property>
 
 		<property name="hibernate.connection.username">
-			<!-- This is my (Katelyn's) local database login info, to be deleted when we get access to an aws database -->
+
 			chatteradmin
 		</property>
 
