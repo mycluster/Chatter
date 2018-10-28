@@ -9,7 +9,7 @@ import { MatSidenavModule, MatCardModule, MatButtonModule } from '@angular/mater
 
 //components
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './Login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserHomeComponent } from './user-home/user-home.component';
