@@ -6,6 +6,7 @@ Chatter is a project written for Project 2 in the Revature bootcamp. Chatter is 
 * Hibernate
 * Maven
 * JUnit
+* Selenuium
 * Log4J
 
 ### Authors
