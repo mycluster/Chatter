@@ -18,7 +18,7 @@ export class NoteFormService {
 
     body = body.set('notename', noteModelo.notename);
     body = body.set('note', noteModelo.note);
-   return this.http.post(`http://localhost:8089/chatterJava/NoteForm`, body, {headers: headers});
+   return this.http.post(`http://18.223.100.121:8085/chatterJava/NoteForm`, body, {headers: headers});
   }
   findNote(notename:string){
     let body = new HttpParams();

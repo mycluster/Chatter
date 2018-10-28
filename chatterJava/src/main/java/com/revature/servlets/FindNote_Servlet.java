@@ -95,10 +95,10 @@ public class FindNote_Servlet extends HttpServlet{
 		
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(
-						"jdbc:oracle:thin:@localhost:1521:xe",
+						"jdbc:oracle:thin:@chatterdb.cxy5thqj2yfi.us-east-2.rds.amazonaws.com:1521:ORCL",
 						//"jdbc:oracle:thin:@sandbox-180910.c7gydzn7nvzj.us-east-1.rds.amazonaws.com:1521:orcl",
-						"trex",
-						"trex"
+						"chatteradmin",
+						"chatterpass"
 					);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
