@@ -20,7 +20,7 @@ const WSP = 'https://tools.ietf.org/html/rfc6455';
 export class ChatComponent implements OnInit {
   action = Action;
   user: User;
-  sentAt= this.sentAt;
+  //sentAt= this.sentAt;
   // id = this.user.id;
   // username = this.user.username;
   // fName = this.user.fName;
@@ -50,10 +50,16 @@ export class ChatComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    // subscribing to any changes in the list of items / messages
     this.matListItems.changes.subscribe(elements => {
       this.scrollToBottom();
     });
+  }
+
+  private initModel(): void {
+    const randomId = this.getRandomId();
+    this.user = {
+      id: randomId
+    }
   }
 
 
@@ -62,16 +68,6 @@ export class ChatComponent implements OnInit {
       this.matList.nativeElement.scrollTop = this.matList.nativeElement.scrollHeight;
     } catch (err) {
     }
-  }
-
-  private initModel(): void {
-    this.user = {
-      id: this.user.id,
-      username: this.user.username,
-      fName: this.user.fName,
-      lName: this.user.lName
-    }
-     
   }
 
   private initIoConnection(): void {
@@ -84,24 +80,29 @@ export class ChatComponent implements OnInit {
 
     this.socketService.onEvent(Event.CONNECT)
       .subscribe(() => {
-        console.log('User has been Connected');
+        console.log('User has entered chat');
       });
 
     this.socketService.onEvent(Event.DISCONNECT)
       .subscribe(() => {
-       console.log("User has disconnected");
+       console.log("User has left chat");
       });
   }
 
   public onClickUserInfo() {
     this.openUserPopup({
       data: {
-        username: this.user.username,
+        username: this.user.name,
         title: 'Edit details',
         dialogType: DialogUserType.EDIT
       }
     });
   }
+
+  private getRandomId(): number {
+    return Math.floor(Math.random()* (999999)) + 1;
+  }
+
 
   private openUserPopup(params): void {
     this.dialogRef = this.dialog.open(DialogUserComponent, params);
@@ -110,7 +111,7 @@ export class ChatComponent implements OnInit {
         return;
       }
 
-      this.user.username = paramsDialog.username;
+      this.user.name = paramsDialog.username;
       if (paramsDialog.dialogType === DialogUserType.NEW) {
         this.initIoConnection();
         this.sendNotification(paramsDialog, Action.JOINED);
@@ -122,18 +123,14 @@ export class ChatComponent implements OnInit {
   });
 }
 
-  public sendMessage(message: Message): void {
+  public sendMessage(message: string): void {
     if (!message) {
       return;
     }
 
     this.socketService.send({
-      id: message.id,
-      message: message.message,
-      sender: message.sender,
-      receiver: message.receiver,
-      sentAt: message.sentAt,
-      edited: message.edited 
+      from: this.user,
+      content: message
       
     });
     this.messageContent = null;
@@ -146,17 +143,21 @@ export class ChatComponent implements OnInit {
 
     if (action === Action.JOINED) {
       message = {
-        id: message.id,
-        message: this.messages,
-        sender: this.user,
-        receiver: this.user,
-        sentAt: message.sentAt,
-        edited: message.edited
+        from: this.user,
+        action: action
       }
     
+    }else if (action === Action.RENAME){
+      message = {
+        action: action,
+        content: {
+          username: this.user.name,
+          previousUsername: params.previousUsername
+        }
+      };
     }
 
-    this.socketService.send(this.sentAt);
+    this.socketService.send(message);
 
   }
 }

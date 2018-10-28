@@ -1,5 +1,8 @@
 export enum Action {
     NEWMESSAGE,
     EDIT,
-    SWITCHCONVO
+    SWITCHCONVO,
+    JOINED,
+    LEFT,
+    RENAME
   }
