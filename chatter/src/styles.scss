@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+
+button{
+    background-color: #F0CD59;
+    color: #453E27;
+    border-radius: 25px;
+    border: 2px outset #C8C8C8;
+    padding:5px;
+}

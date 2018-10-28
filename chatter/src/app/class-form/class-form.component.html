@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="classform">
+    <h1>Create a Class</h1>
+
+    <form  (ngSubmit)="onSubmit()">
+      <div [formGroup]="classForm">
+        <div class="form-group">
+          <label for="username">User Name</label><br>
+          <input type="text" class="form-control" formControlName="username" required>
+        </div>
+        <div class="form-group">
+          <label for="classname">Class Name</label><br>
+          <input type="text" class="form-control"  formControlName="classname" required>
+        </div>
+      </div><!-- only the above two input boxes are within the [fromGroup]-->
+        <!--This was done because ngModel does not work inside a [fromGroup]-->
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select class="form-control" name="subject"[(ngModel)]="subject" required>
+          <option *ngFor="let p of selected">{{ p.name }}</option>
+        </select>
+      
+      </div>
+      <br>
+      <button type="submit" class="btn btn-default" >Submit</button>
+
+    </form>
+
+    
+
