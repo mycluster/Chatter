@@ -1,18 +1,25 @@
+
+<!--The dialog box displays to the user to input their username-->
 <h2 mat-dialog-title>{{params.title}}</h2>
 
 <mat-dialog-content>
   <mat-form-field>
+    <!--Input lets the user know to input their desired username-->
+    <!--When the user presses enter, the value is sent to the socket-->
+    <!--and is assigned to the User's name-->
+    <!--Should the user not input a username, they are notified to do so-->
     <input matInput name="username" placeholder="Username" 
            [(ngModel)]="params.username" (keyup.enter)="onSave()" [formControl]="usernameFormControl" required>
     <mat-error>Please enter your username</mat-error>
     <mat-hint>Please type your username</mat-hint>
   </mat-form-field>
 </mat-dialog-content>
-
+<!--When the user enters the chat for the first time, they are assigned an initial username-->
 <mat-dialog-actions *ngIf="params?.typeDialog === 'new-user'" [attr.align]="'end'">
   <button mat-raised-button color="primary" mat-dialog-close (click)="onSave()" [disabled]="usernameFormControl.hasError('required')">Chat!</button>
 </mat-dialog-actions>
-
+<!--Should they click the Chatter icon, they are able to reassign themselves another name which is communicated to the socket-->
+<!--and chatterbox notifies other users in the session that they have switched usernames-->
 <mat-dialog-actions *ngIf="params?.typeDialog === 'edit-user'" [attr.align]="'end'">
   <button mat-button mat-dialog-close color="secondary">Close</button>
   <button mat-raised-button color="primary" mat-dialog-close (click)="onSave()">Save</button>

@@ -7,6 +7,10 @@ import { Time } from '@angular/common';
   providedIn: 'root'
 })
 
+//Future iterations of ChatterBox will use REST to connect with the backend where messages 
+//will be persisted in the database. This is done making HttpClient to communicate.
+//This will allow the user to see the time of the message, as well as retrieve 
+//and edit messages between two users.
 export class MessageService {
 
   constructor(private http:HttpClient, private messageService: MessageService) { }
@@ -75,7 +79,7 @@ export class MessageService {
     body=body.set('sentAt', null)
   }
 
-  updateNote(id:string, message: string, sender:string, receiver:string, sentAt: Time){   //do we want to include messages with the User class, then we could update a note  
+  updateMessage(id:string, message: string, sender:string, receiver:string, sentAt: Time){   //do we want to include messages with the User class, then we could update a note  
     let body = new HttpParams();
     let headers = new HttpHeaders().set(
       'Content-Type', 'application/x-www-form-urlencoded'
@@ -87,6 +91,5 @@ export class MessageService {
     body=body.set('sentAt', JSON.stringify(sentAt))
   }
 
-  
 
 }

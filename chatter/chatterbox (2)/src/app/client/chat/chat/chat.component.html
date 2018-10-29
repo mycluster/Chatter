@@ -2,6 +2,10 @@
     <img src="/assets/favicon-32x32.png">
   </button>
   
+  <!--The ChatComponent injects the user's name and the content of the transmitted message when the -->
+  <!--user presses enter. If the user chooses to rename themselves, the action will trigger the 
+  component to display to page that the user has chosen to change their name. The chatterbox currently
+  accepts messages of a 360 character length. -->
   <div class="chatterbox-container">
     <mat-card class="main-card">
       <mat-list class="chatterbox-list">
@@ -13,7 +17,7 @@
             <span>{{message.content}}</span>
           </p>
           <p mat-line *ngIf="message.action === action.JOINED" class="chatterbox-notify">
-            <span>You have started a conversation with <b>{{message.from.name}}</b></span>
+            <span>You have started a conversation as <b>{{message.from.name}}</b></span>
           </p>
           <p mat-line *ngIf="message.action ===action.RENAME" class="chatterbox-notify">
             <span> <b>{{message.content.previousUsername}}</b></span>

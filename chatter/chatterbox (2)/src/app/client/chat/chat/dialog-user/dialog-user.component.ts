@@ -21,7 +21,9 @@ import { FormControl, Validators } from '@angular/forms';
 //DialogUserComponent takes in user input as a string
 // and displays it to the screen as that user entering 
 //the chat session. Should the user change their name,
-//the username entered is reassigned 
+//the username entered is reassigned and displays to
+//screen that the original username's 'is now' the 
+//respecified username.
 export class DialogUserComponent implements OnInit {
   usernameFormControl = new FormControl('', [Validators.required]);
   previousUsername: string;
@@ -34,7 +36,11 @@ export class DialogUserComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  //When the username clicks the Chatter icon at the 
+  //top right of the screen, they are able to edit their 
+  //username. This value is then reassigned and chatterbox
+  //notifies the other users in the chat session that
+  //the user has switched usernames.
   public onSave(): void {
     this.dialogRef.close({
       username: this.params.username,
