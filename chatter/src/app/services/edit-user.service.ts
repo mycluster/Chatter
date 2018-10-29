@@ -18,6 +18,6 @@ export class EditUser_Serv {
     body = body.set('email', editUsr.email);
 
 
-    return this.http.post(`http://18.223.100.121:8085/xhr_post/EditUser`, body, {headers: headers});
+    return this.http.post(`http://18.223.161.42:8085/xhr_post/EditUser`, body, {headers: headers});
   }//end register()
 }//end class

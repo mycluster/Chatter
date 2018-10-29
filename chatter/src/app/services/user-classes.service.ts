@@ -17,7 +17,7 @@ export class User_Classes_Service {
 
     body = body.set('subject', selectedVal);
 
-   return this.http.post(`http://18.223.100.121:8085/UserClasses`, body, {headers: headers});
+   return this.http.post(`http://http://18.223.161.42:8085/UserClasses`, body, {headers: headers});
   }
 
 }

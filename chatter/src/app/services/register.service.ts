@@ -22,7 +22,7 @@ export class RegisterService {
     body = body.set('password', registration.password);
 
 
-    return this.http.post(`http://18.223.100.121:8085/chatterJava/Register`, body, {headers: headers});
+    return this.http.post(`http://18.223.161.42:8085/chatterJava/Register`, body, {headers: headers});
   }
 
 }
