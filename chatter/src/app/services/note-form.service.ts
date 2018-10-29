@@ -25,7 +25,7 @@ export class NoteFormService {
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
     body = body.set('notename', notename);
-    return this.http.post<Note_Form_Find[]>(`http://18.223.161.42:8085/chatterJava/Register`, body, {headers: headers});
+    return this.http.post<Note_Form_Find[]>(`http://18.223.161.42:8085/chatterJava/NoteForm`, body, {headers: headers});
 
   }
 
