@@ -76,6 +76,44 @@ public class NoteDaoImpl implements NoteDao {
 		// return the Note
 		return note;
 	}
+<<<<<<< HEAD
+=======
+	
+	
+	/**
+	 * Takes in an Integer whose value corresponds to the primary key of a record in
+	 * the Note table and returns that record as a Note object
+	 */
+	@Override
+	public Note selectNoteByName(String name) {
+		// create a new session
+				Session session = HibernateUtil.getSession();
+				// create a null reference to a query
+				Query query = null;
+				// create the HQL string
+				String hql = "FROM Notes WHERE n_name = :name";
+				// create a null reference to a user
+				Note note = null;
+
+		try {
+			// attempt to get the Note
+			note = (Note)session.get(Note.class, name);
+			logger.info("Retrieved Note");
+		} catch (HibernateException e) {
+			// if a Hibernate Exception is triggered, catch
+			// it and log it
+			logger.error("HibernateException triggered", e);
+		} finally {
+			// clean up
+			session.close();
+			logger.info("Session closed");
+		}
+		logger.info("Returning Note");
+		logger.debug("Note: " + note.toString());
+		// return the Note
+		return note;
+	}
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 
 	/**
 	 * Takes in a Note object and inserts a record in to the Note table whose data
@@ -179,7 +217,11 @@ public class NoteDaoImpl implements NoteDao {
 			n = (Note) session.get(Note.class, note.getId());
 			logger.info("Note retrieved from the database");
 
+<<<<<<< HEAD
 			// set the type, location, and owner to match the input Note
+=======
+			// set the type, location, name, editor and owner to match the input Note
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 			// we do not update id because they already match
 			// also, we should not be going around changing primary keys
 			// we don't need to manually update lastEdited because
@@ -187,6 +229,11 @@ public class NoteDaoImpl implements NoteDao {
 			n.setLocation(note.getLocation());
 			n.setOwner(note.getOwner());
 			n.setType(note.getType());
+<<<<<<< HEAD
+=======
+			n.setName(note.getName());
+			n.setEditor(note.getEditor());
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 			logger.info("Note from database updated");
 
 			// save the changes

@@ -15,5 +15,9 @@ public interface NoteDao {
 	
 	// we will want to retrieve all notes a user has
 	public List<Note> selectAllNotesByOwner(User owner);
+<<<<<<< HEAD
+=======
+	public Note selectNoteByName(String id);
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 
 }

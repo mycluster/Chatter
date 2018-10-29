@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <form #classForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="subject">Subject</label>
+ 
+    <select class="form-control" name="subject" [(ngModel)]="classes"  required>
+      <option *ngFor="let p of selected" >{{p.name}}</option>
+    </select>
+  
+    
+    
+  </div>
+  
+  <button type="submit" class="btn btn-default" >Submit</button>
+</form>
+</div>

@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<h1>Enter a note</h1>
+<form #starterForm="ngForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label for="noteName">Note Name</label>
+    <input type="text" class="form-control" name="noteName" ngModel #noteName="ngModel" [(ngModel)]="user.noteName" required>
+    <div class="alert alert-danger" [hidden]="noteName.valid || noteName.pristine">Note Name is required</div>
+  </div>
+
+  
+      <textarea rows="4" cols="150"  name="note"
+      #note="ngModel"
+      [(ngModel)]="user.note"
+      required></textarea>
+
+
+    <br />
+    <span *ngIf="!note.valid">Note cannot remain empty</span>
+    <br />
+    <button class="btn btn-default" [disabled]="!starterForm.valid">Submit</button>
+    <br /><br />
+    {{ message }}
+    <br />
+    <b>Valid:</b> {{ note.valid}}
+    <br />
+    <b>Changed:</b> {{ note.touched }}
+</form>

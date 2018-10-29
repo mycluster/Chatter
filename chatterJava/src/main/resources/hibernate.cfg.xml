@@ -2,46 +2,46 @@
 <!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <!-- Root tag of a hibernate main configuration file -->
 <hibernate-configuration>
-	
+
 	<!-- This tag begins configuration details for the hibernate app -->
 	<session-factory>
 		<!-- This is like the JDBC class.forName() -->
 		<property name="hibernate.connection.driver_class">
 			oracle.jdbc.OracleDriver
 		</property>
-		
+
 		<!-- This configures the database engine we intend to use. If you ever change languages,
 		this property MUST change as well. -->
 		<property name="hibernate.dialect">
 			org.hibernate.dialect.Oracle10gDialect
 		</property>
-		
+
 		<property name="hibernate.connection.url">
-			jdbc:oracle:thin:@localhost:1521:xe
+			jdbc:oracle:thin:@chatterdb.cxy5thqj2yfi.us-east-2.rds.amazonaws.com:1521:ORCL
 		</property>
-		
+
 		<property name="hibernate.connection.username">
-			<!-- This is my (Katelyn's) local database login info, to be deleted when we get access to an aws database -->
-			project2
+
+			chatteradmin
 		</property>
-		
+
 		<property name="hibernate.connection.password">
-			chatter
+			chatterpass
 		</property>
-		
+
 		<!-- This determines how many connections a single user can have to the database at a given moment.
 		Allowing many allows for faster transactions, but it also means that 50 users could make up 500 connections
 		in a pool_size of 10. Considering free tier RDS' cap at 50 connections, it's not recommended -->
 		<property name="hibernate.connection.pool_size">
 			3
 		</property>
-		
+
 		<!-- syso all generated SQL for us to see -->
 		<property name="show_sql">
 			true
 		</property>
-		
-		<!-- 
+
+		<!--
 			hbm2ddl, or, hibernate mapping to data definition language, is the resource that lets us create
 			entire databases from simply running the application. There are FOUR states that we can set it to:
 			create: destroys, then creates an entire database from scratch
@@ -52,11 +52,15 @@
 		<property name="hibernate.hbm2ddl.auto">
 			update
 		</property>
-		
+
 		<mapping class="com.revature.beans.AccessLevel"/>
 		<mapping class="com.revature.beans.Activation"/>
 		<mapping class="com.revature.beans.Class"/>
+		<mapping class="com.revature.beans.Cls"/>
+		<mapping class="com.revature.beans.Edit"/>
+		<mapping class="com.revature.beans.Message"/>
 		<mapping class="com.revature.beans.ClassAccess"/>
+		<mapping class="com.revature.beans.ClassCategory"/>
 		<mapping class="com.revature.beans.ClassMembership"/>
 		<mapping class="com.revature.beans.ClassRole"/>
 		<mapping class="com.revature.beans.Note"/>
@@ -65,5 +69,5 @@
 		<mapping class="com.revature.beans.User"/>
 		<mapping class="com.revature.beans.UserAccess"/>
 	</session-factory>
- 
+
 </hibernate-configuration>

@@ -9,4 +9,113 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <description>Location to store uploaded file</description>
+    <param-name>file-upload</param-name>
+    <param-value>
+         C:\Installed\apache-tomcat-8.5.34\webapps\data\
+     	</param-value>
+  </context-param>
+  <!-- Allow all cross origin interaction from Angular -->
+  <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+        <init-param>
+            <param-name>cors.allowed.origins</param-name>
+            <param-value>http://localhost:4200</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.allowed.methods</param-name>
+            <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!-- Register Servlet -->
+   <servlet>
+    <description></description>
+    <display-name>Register_Servlet</display-name>
+    <servlet-name>Register_Servlet</servlet-name>
+    <servlet-class>com.revature.servlets.Register_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Register_Servlet</servlet-name>
+    <url-pattern>/Register</url-pattern>
+  </servlet-mapping>
+   <!-- login servlet  -->
+ <servlet>
+    <description></description>
+    <display-name>Login_Servlet</display-name>
+    <servlet-name>Login_Servlet</servlet-name>
+    <servlet-class>com.revature.servlets.Login_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login_Servlet</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+   <!-- note form servlet  -->
+ <servlet>
+    <description></description>
+    <display-name>NoteForm_Servlet</display-name>
+    <servlet-name>NoteForm_Servlet</servlet-name>
+    <servlet-class>com.revature.servlets.NoteForm_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoteForm_Servlet</servlet-name>
+    <url-pattern>/NoteForm</url-pattern>
+  </servlet-mapping>
+    <!-- find note servlet  -->
+ <servlet>
+    <description></description>
+    <display-name>FindNote_Servlet</display-name>
+    <servlet-name>FindNote_Servlet</servlet-name>
+    <servlet-class>com.revature.servlets.FindNote_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindNote_Servlet</servlet-name>
+    <url-pattern>/FindNote_Servlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>selectByConversation</display-name>
+    <servlet-name>selectByConversation</servlet-name>
+    <servlet-class>com.revature.servlets.selectByConversation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>selectByConversation</servlet-name>
+    <url-pattern>/selectByConversation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectNMostRecentByConversation</display-name>
+    <servlet-name>SelectNMostRecentByConversation</servlet-name>
+    <servlet-class>com.revature.servlets.SelectNMostRecentByConversation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectNMostRecentByConversation</servlet-name>
+    <url-pattern>/SelectNMostRecentByConversation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Upload</display-name>
+    <servlet-name>Upload</servlet-name>
+    <servlet-class>com.revature.servlets.Upload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Upload</servlet-name>
+    <url-pattern>/Upload</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoadNote</display-name>
+    <servlet-name>LoadNote</servlet-name>
+    <servlet-class>com.revature.servlets.LoadNote</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadNote</servlet-name>
+    <url-pattern>/LoadNote</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -21,6 +21,11 @@ public class MessageDaoImpl implements MessageDao {
 	/**
 	 * Selects all records from the Message table and returns them as a list of
 	 * Message objects
+<<<<<<< HEAD
+=======
+	 * 
+	 * @return
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 	 */
 	@Override
 	public List<Message> selectAllMessage() {
@@ -375,11 +380,19 @@ public class MessageDaoImpl implements MessageDao {
 		logger.debug("Message: " + messages);
 		return messages;
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Takes in two User objects and selects all records from the Message table where
 	 * one of the users is the sender and the other is the receiver. Returns the records as a list of Message
 	 * objects
+=======
+
+	/**
+	 * Takes in two User objects and selects all records from the Message table
+	 * where one of the users is the sender and the other is the receiver. Returns
+	 * the records as a list of Message objects
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 	 */
 	@Override
 	public List<Message> selectMessageByConversation(User user1, User user2) {
@@ -405,6 +418,14 @@ public class MessageDaoImpl implements MessageDao {
 					Restrictions.and(Restrictions.eq("sender", user1), Restrictions.eq("receiver", user2)),
 					Restrictions.and(Restrictions.eq("sender", user2), Restrictions.eq("receiver", user1))));
 			logger.info("Sender and Receiver restrictions added to the query");
+<<<<<<< HEAD
+=======
+
+			// set the order by
+			crit.addOrder(Order.desc("sentAt"));
+			logger.info("Ordering set to desc based on sentAt");
+			
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 			// attempt to execute the query
 			messages = crit.list();
 			logger.info("Messages retrieved");
@@ -422,10 +443,18 @@ public class MessageDaoImpl implements MessageDao {
 		logger.debug("Message: " + messages);
 		return messages;
 	}
+<<<<<<< HEAD
 	/**
 	 * Takes in two User objects and an Integer n and selects all records from the Message table where
 	 * one of the users is the sender and the other is the receiver. Returns only the n most recent records
 	 * as a list of Message objects
+=======
+
+	/**
+	 * Takes in two User objects and an Integer n and selects all records from the
+	 * Message table where one of the users is the sender and the other is the
+	 * receiver. Returns only the n most recent records as a list of Message objects
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 	 */
 	@Override
 	public List<Message> selectNMostRecentByConversation(User user1, User user2, Integer n) {
@@ -478,4 +507,35 @@ public class MessageDaoImpl implements MessageDao {
 		return messages;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public Message selectMessageById(Integer id) {
+		// create a new session
+		Session session = HibernateUtil.getSession();
+		// make a null reference to a Message object
+		Message message = null;
+		logger.info("Selecting Message by id via DAO");
+		logger.info("With id" + id);
+
+		try {
+			// attempt to get the Message
+			message = (Message) session.get(Message.class, id);
+			logger.info("Retrieved Message");
+		} catch (HibernateException e) {
+			// if a Hibernate Exception is triggered, catch
+			// it and log it
+			logger.error("HibernateException triggered", e);
+		} finally {
+			// clean up
+			session.close();
+			logger.info("Session closed");
+		}
+		logger.info("Returning Message");
+		logger.debug("Message: " + message.toString());
+		// return the Message
+		return message;
+	}
+
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 }

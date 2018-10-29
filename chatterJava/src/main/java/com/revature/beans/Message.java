@@ -43,7 +43,10 @@ public class Message {
 	private Edit edited;
 
 	@Column(name = "sent_at", columnDefinition = "TIMESTAMP")
+<<<<<<< HEAD
 	@Temporal(TemporalType.TIMESTAMP)
+=======
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 	private Timestamp sentAt;
 
 	// exciting method to make sure that the sent_at timestamp is accurate

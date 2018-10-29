@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+<<<<<<< HEAD
+=======
+import javax.persistence.OneToOne;
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -38,8 +42,20 @@ public class Note {
 	private String location;
 
 	@Column(name = "last_edited", columnDefinition = "TIMESTAMP")
+<<<<<<< HEAD
 	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp lastEdited;
+=======
+//	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp lastEdited;
+	
+	@Column(name="n_name")
+	private String name;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "editing")
+	private User editor;
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 
 	protected void onUpdate() {
 		// create a java calendar instance
@@ -58,28 +74,68 @@ public class Note {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+<<<<<<< HEAD
 
 	public Note(Integer id, User owner, NoteType type, String location, Timestamp lastEdited) {
+=======
+	
+	public Note(Integer id, User owner, NoteType type, String location, String name, User editor) {
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
+		this.id = id;
+		this.owner = owner;
+		this.type = type;
+		this.location = location;
+<<<<<<< HEAD
+		this.lastEdited = lastEdited;
+	}
+=======
+		this.name = name;
+		this.editor = editor;
+		this.onUpdate();
+	}
+	
+	
+
+	public Note(Integer id, User owner, NoteType type, String location, String name) {
+		this.id = id;
+		this.owner = owner;
+		this.type = type;
+		this.location = location;
+		this.name = name;
+		this.editor = null;
+		this.onUpdate();
+	}
+
+	public Note(Integer id, User owner, NoteType type, String location, Timestamp lastEdited, String name, User editor) {
 		this.id = id;
 		this.owner = owner;
 		this.type = type;
 		this.location = location;
 		this.lastEdited = lastEdited;
+		this.editor = editor;
+		this.name = name;
 	}
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 
 	@Override
 	public String toString() {
 		return "Note [id=" + id + ", owner=" + owner + ", type=" + type + ", location=" + location + ", lastEdited="
+<<<<<<< HEAD
 				+ lastEdited + "]";
+=======
+				+ lastEdited + ", name=" + name + ", editor=" + editor + "]";
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((editor == null) ? 0 : editor.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastEdited == null) ? 0 : lastEdited.hashCode());
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -94,6 +150,11 @@ public class Note {
 		if (getClass() != obj.getClass())
 			return false;
 		Note other = (Note) obj;
+		if (editor == null) {
+			if (other.editor != null)
+				return false;
+		} else if (!editor.equals(other.editor))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -108,6 +169,11 @@ public class Note {
 			if (other.location != null)
 				return false;
 		} else if (!location.equals(other.location))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		if (owner == null) {
 			if (other.owner != null)
@@ -165,4 +231,23 @@ public class Note {
 		this.lastEdited = lastEdited;
 	}
 
+<<<<<<< HEAD
+=======
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public User getEditor() {
+		return editor;
+	}
+
+	public void setEditor(User editor) {
+		this.editor = editor;
+	}
+
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 }

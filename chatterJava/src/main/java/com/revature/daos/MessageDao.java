@@ -9,6 +9,10 @@ public interface MessageDao {
 	
 	//select all for past message history upon click
 	public List<Message> selectAllMessage();
+<<<<<<< HEAD
+=======
+	public Message selectMessageById(Integer id);
+>>>>>>> 78e6d76f3ded2a0287329aee6f0db53f4bdf8c10
 	public Integer insertMessage(Message message);
 	//user can click a delete icon to remove a message
 	public void deleteMessageById(Integer id);
