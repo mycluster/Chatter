@@ -1,5 +1,5 @@
 ## Chatter
-Chatter is a project written for Project 2 in the Revature bootcamp. Chatter is a group note-sharing applicaton which allows you to create notes that are easily shared among classmates. Chatterbox is the Chatter's instant messaging feature. 
+Chatter is an online note sharing application which aims to make classroom collaboration quick and easy. Upon registration on the Chatter website, users are able to create notes, which are easily accessed by other users for reading and editing. Chatterbox is Chatter’s in-house IM application which allows users to message each other in real time; this promotes further communication in either a classroom setting, or a professional environment. 
 
 This project is hosted at (pending AWS free status)
 * http://18.223.161.42:8085/chatterJava
